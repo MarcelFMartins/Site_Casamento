@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
+    <title>Marlon e Catia</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @font-face {
+            font-family: 'PinyonScript';
+            src: url('fonts/PinyonScript-Regular.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: fixed;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 40px;
+            z-index: 1000;
+            background: transparent;
+            backdrop-filter: blur(6px);
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav li {
+            list-style: none;
+            padding: 10px 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header.scrolled nav a {
+            color: #455217 !important;
+        }
+
+        header.scrolled .menu-toggle {
+            color: #455217;
+        }
+
+        header,
+        nav a {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        section {
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        #inicio {
+            position: relative;
+            background-image: url('buque.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fundo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            top: 0;
+        }
+
+        #inicio .container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: #c4c4c4;
+        }
+
+        #inicio h1 {
+            font-size: 10rem;
+            font-family: 'PinyonScript';
+            font-weight: normal;
+            letter-spacing: 10px;
+            color: white;
+            -webkit-background-clip: text;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        #inicio p {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        button {
+            background: #64a19d;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-top: 45px;
+        }
+
+
+
+        /* ================= LOCAIS ================= */
+
+        #locais .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flex-locais {
+            display: flex;
+            gap: 50px;
+            margin-top: 80px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .local-card {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease;
+        }
+
+        .local-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .local-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .local-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 40px 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            color: white;
+        }
+
+        .local-overlay h1 {
+            font-family: 'PinyonScript';
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .local-overlay h3 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .local-overlay p {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .local-links {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .local-links a {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #455217;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .local-links a:hover {
+            background: #455217;
+            color: white;
+        }
+
+        .vamoscasar h1 {
+            font-family: 'PinyonScript';
+            font-size: 40px;
+            color: #455217;
+            text-align: center;
+            font-weight: lighter;
+            font-weight: bold;
+        }
+
+        .vamoscasar h2 {
+            font-family: serif;
+            font-size: 15px;
+            color: #455217;
+            text-align: center;
+            font-weight: lighter;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        .vamoscasar p {
+            text-align: center;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 800px;
+            color: black;
+            font-family: Cambria, serif;
+            font-size: 1rem;
+
+        }
+
+        #countdown {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+        }
+
+        .tempo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .window {
+            height: 80px;
+            overflow: hidden;
+            padding: 0 10px;
+        }
+
+        .tracker {
+            display: flex;
+            flex-direction: column;
+            transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tracker span {
+            height: 80px;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #455217;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tempo small {
+            font-size: 15px;
+            color: #455217;
+            margin-top: 8px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bold;
+        }
+
+        /* ================== PRESENTES ================= */
+
+        #presentes {
+            background-color: #f9f9f9;
+        }
+
+        #presentes h1 {
+            font-family: 'PinyonScript';
+            font-size: 40px;
+            color: #455217;
+            text-align: center;
+            font-weight: lighter;
+            font-weight: bold;
+
+        }
+
+        .lista-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 800px;
+            /* Ajuste esse valor para a altura média de duas fileiras de produtos */
+        }
+
+        .presente-card {
+            border: 1px solid #eeeeee77;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            background-color: white;
+        }
+
+        .presente-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .presente-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .presente-card h3 {
+            color: #455217;
+        }
+
+        .btn-comprar {
+            display: inline-block;
+            background: #455217;
+            /* Verde oliva do seu tema */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .paginacao {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        #pageIndicator {
+            white-space: nowrap;
+            font-family: 'Raleway', sans-serif;
+            color: #455217;
+            font-weight: bold;
+        }
+
+        .paginacao button {
+            background-color: #455217;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+            transition: 0.3s;
+            padding: 15px;
+            margin-bottom: 45px;
+        }
+
+        .paginacao button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .paginacao span {
+            font-family: 'Raleway', sans-serif;
+            color: #455217;
+            font-weight: bold;
+
+        }
+
+        /* ================== CABELO E MAQUIAGEM ================= */
+
+        #beleza {
+            padding: 100px 20px;
+            background-color: #f9f9f9;
+        }
+
+        #beleza h1 {
+            font-family: 'PinyonScript';
+            font-size: 45px;
+            color: #455217;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .beleza-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .beleza-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 20px 30px 20px;
+            /* espaço para a foto */
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.4s;
+        }
+
+        .beleza-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .beleza-card img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            /* deixa redonda */
+            object-fit: cover;
+            /* corta sem distorcer */
+            object-position: center;
+            /* centraliza o rosto */
+            margin: 0 auto 20px auto;
+            display: block;
+            border: 4px solid #f3f3f3;
+            /* opcional - borda suave */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .beleza-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .beleza-info h3 {
+            color: #455217;
+            margin-bottom: 10px;
+        }
+
+        .beleza-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .beleza-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .btn-beleza {
+            background-color: #455217;
+            border: 1px solid #455217;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-beleza:hover {
+            background: white;
+            color: #455217;
+        }
+
+        /* ================== ONDE FICAR ================ */
+
+        #ondeficar {
+            padding: 80px 20px;
+            background-color: #fff;
+        }
+
+        #ondeficar h1 {
+            font-family: 'PinyonScript';
+            font-size: 40px;
+            color: #455217;
+            text-align: center;
+            font-weight: lighter;
+            font-weight: bold;
+            padding-bottom: 40px;
+            margin-top: 40px;
+        }
+
+        .hoteis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hotel-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .hotel-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hotel-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .hotel-info h3 {
+            font-family: 'Raleway', sans-serif;
+            color: #455217;
+            margin-bottom: 10px;
+        }
+
+        .hotel-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .hotel-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn-hotel {
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 10px 15px;
+            border: 1px solid #455217;
+            color: #455217;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-hotel:hover {
+            background: #455217;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #455217;
+            color: white;
+        }
+
+        /* Ajuste para mobile */
+        @media (max-width: 600px) {
+            .hotel-actions {
+                flex-direction: column;
+            }
+
+            .hoteis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================= CONTATO ==================== */
+
+        /* Container Principal */
+        #contato-e-recados {
+            background-color: #f9f9f9;
+            padding-top: 80px;
+        }
+
+        .bloco-contato,
+        .bloco-mensagens {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Títulos e Subtítulos */
+        .titulo-secao {
+            font-family: 'PinyonScript', cursive;
+            font-size: 3rem;
+            color: #455217;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            font-family: 'Raleway', sans-serif;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Grid de Contato */
+        .contato-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .contato-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .btn-whats {
+            display: inline-block;
+            margin-top: 15px;
+            background-color: #455217;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        /* Divisor Visual */
+        .divisor {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, transparent, #474747, transparent);
+            margin: 40px 0;
+        }
+
+        /* Formulário */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+
+        .form-mensagem {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-mensagem input,
+        .form-mensagem textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .btn-enviar {
+            background-color: #455217;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Footer Integrado */
+        .main-footer {
+            padding: 40px 20px;
+            background-color: #455217;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer-logo {
+            font-family: 'PinyonScript';
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .footer-data {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            .titulo-secao {
+                font-size: 3rem;
+            }
+
+            .contato-card {
+                width: 100%;
+            }
+        }
+
+        /* ================= RESPONSIVO ================= */
+
+        @media(max-width:1024px) {
+            #inicio h1 {
+                font-size: 6rem;
+            }
+        }
+
+        @media(max-width:768px) {
+
+            header {
+                padding: 0 20px;
+                background-color: white;
+                display: flex;
+                justify-content: left;
+                color: black;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                display: none;
+                padding: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                padding: 15px 0;
+            }
+
+            nav a {
+                color: black;
+                box-shadow: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            #inicio h1 {
+                font-size: 3.5rem;
+                letter-spacing: 5px;
+                display: block;
+                white-space: pre-line;
+                word-spacing: 100vw;
+                line-height: 1.1;
+                text-align: center;
+            }
+
+            #inicio p {
+                font-size: 1.5rem;
+            }
+
+            #sobre .container {
+                width: 90%;
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 850px) {
+            .flex-locais {
+                flex-direction: column;
+                /* Empilha um embaixo do outro no celular */
+                align-items: center;
+                gap: 60px;
+                margin-top: 70px;
+            }
+
+            .imagens {
+                max-width: 100%;
+                /* Ocupa a largura total disponível */
+            }
+
+            .imagens img {
+                height: auto;
+                /* Mantém a proporção da imagem */
+                max-height: 400px;
+            }
+
+            /* Remove o espaçamento exagerado na imagem da cerimônia no mobile */
+            .imagens img[style*="margin-top: 80px"] {
+                margin-top: 20px !important;
+            }
+        }
+
+        /* --- Ajuste no Countdown para telas muito pequenas --- */
+        @media (max-width: 480px) {
+            .window {
+                height: 60px;
+                /* Altura reduzida para mobile */
+            }
+
+            .tracker span {
+                height: 60px;
+                /* Garante que o span acompanhe a janela */
+                font-size: 2.5rem;
+            }
+        }
+
+        @media(max-width:768px) {
+            .local-card {
+                width: 100%;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul id="menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#locais">Locais</a></li>
+                <!--<li><a href="#presentes">Lista de Presentes</a></li>-->
+                <li><a href="#beleza">Maquiagem e Cabelo</a></li>
+                <li><a href="#ondeficar">Onde Ficar</a></li>
+                <li><a href="#contato-e-recados">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio">
+        <div class="fundo"></div>
+        <div class="container">
+            <h1>Marlon e Catia</h1>
+            <p>31.10.2026</p>
+        </div>
+    </section>
+
+    <section id="locais">
+        <div class="container">
+            <div class="vamoscasar">
+                <h1>Vamos nos casar!</h1>
+                <p>O grande dia está chegando e não poderiamos estar mais animados para compartilhar com nossa familia e
+                    amigos
+                    um
+                    dos dias mais especiais das nossas vidas! Queremos muito sua presença neste dia tão importante com
+                    muita
+                    festa, amor e carinho em uma comemoração que irá marcar nossas vidas para sempre!</p>
+                <h2>Faltam:</h2>
+            </div>
+
+            <div id="countdown">
+                <div class="tempo">
+                    <div class="window">
+                        <div id="dias-track" class="tracker"></div>
+                    </div>
+                    <small>Dias</small>
+                </div>
+                <div class="tempo">
+                    <div class="window">
+                        <div id="horas-track" class="tracker"></div>
+                    </div>
+                    <small>Horas</small>
+                </div>
+                <div class="tempo">
+                    <div class="window">
+                        <div id="minutos-track" class="tracker"></div>
+                    </div>
+                    <small>Minutos</small>
+                </div>
+            </div>
+
+            <div class="flex-locais">
+
+                <div class="local-card">
+                    <img class="local-img" src="img/igreja.jpg">
+                    <div class="local-overlay">
+                        <h1>A Cerimônia</h1>
+                        <h3>31 de Outubro de 2026 • 16h30</h3>
+                        <p><strong>Catedral Sagrado Coração de Jesus</strong></p>
+                        <p>Av. Getúlio Vargas, 15 - Centro</p>
+                        <p>União da Vitória - PR</p>
+                        <div class="local-links">
+                            <a href="https://maps.app.goo.gl/wBdQbWtj6M3JFFy18" target="_blank">Ver Direções</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="local-card">
+                    <img class="local-img" src="img/wooden.jpg">
+                    <div class="local-overlay">
+                        <h1>A Festa</h1>
+                        <h3>31 de Outubro de 2026</h3>
+                        <p><strong>Wooden Class</strong></p>
+                        <p>Rua Carlos Zipperer, 203</p>
+                        <p>União da Vitória - PR</p>
+                        <div class="local-links">
+                            <a href="https://maps.app.goo.gl/EFDrTwsfL9UdBXzy9" target="_blank">Ver Direções</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--
+    <section id="presentes">
+        <h1>Lista de Presentes</h1>
+        <div class="lista-grid" id="lista-presentes">
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689         " target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689         " target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689         " target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+            <div class="presente-card">
+                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
+                    alt="Jogo de Pratos">
+                <h3>Jogo de Pratos</h3>
+                <p>R$ 199,90</p>
+                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
+                    class="btn-comprar">Presentear</a>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="paginacao">
+            <button id="prevBtn" onclick="mudarPagina(-1)">❮ Anterior</button>
+            <span id="pageIndicator">Página 1</span>
+            <button id="nextBtn" onclick="mudarPagina(1)">Próximo ❯</button>
+        </div>
+        </div>
+    </section>
+    -->
+
+
+    <section id="beleza">
+        <h1>Maquiagem e Cabelo</h1>
+
+        <div class="beleza-grid">
+
+            <div class="beleza-card">
+                <img src="img/beleza1.jpg">
+                <div class="beleza-info">
+                    <h3>Thaís Colaço</h3>
+                    <p>Expert em Mechas e terapia capilar</p>
+                    <p>União da Vitória - PR</p>
+                    <div class="beleza-actions">
+                        <a href="https://www.instagram.com/thaiscolacoo" class="btn-beleza"
+                            target="_blank">Instagram</a>
+                        <a href="https://wa.me/554299447370" class="btn-beleza" target="_blank">Agendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beleza-card">
+                <img src="img/beleza2.jpg">
+                <div class="beleza-info">
+                    <h3>Nat</h3>
+                    <p>Cabeleireira e Design de cor</p>
+                    <p>União da Vitória - PR</p>
+                    <div class="beleza-actions">
+                        <a href="https://www.instagram.com/natachaboiarski_studiohair" class="btn-beleza">Instagram</a>
+                        <a href="https://wa.me/554235233465" class="btn-beleza">Agendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beleza-card">
+                <img src="img/beleza3.jpg">
+                <div class="beleza-info">
+                    <h3>Elaine Cecchin</h3>
+                    <p>Especialista em Mechas, Cor e Penteado</p>
+                    <p>União da Vitória - PR</p>
+                    <div class="beleza-actions">
+                        <a href="https://www.instagram.com/eelainececchin" class="btn-beleza">Instagram</a>
+                        <a href="https://wa.me/5542984170242" class="btn-beleza">Agendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beleza-card">
+                <img src="img/maquiagem1.jpg">
+                <div class="beleza-info">
+                    <h3>Aline Francielly</h3>
+                    <p>Maquiadora e Designer de Sobrancelhas</p>
+                    <p>Porto União - SC</p>
+                    <div class="beleza-actions">
+                        <a href="https://www.instagram.com/alinefranciellymakeup_" class="btn-beleza">Instagram</a>
+                        <a href="https://wa.me/" class="btn-beleza">Agendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beleza-card">
+                <img src="img/maquiagem2.jpg">
+                <div class="beleza-info">
+                    <h3>Skarlathy Behm</h3>
+                    <p>Maquiagem social, Sobrancelhas, Design, Tintura, Brow Lamination</p>
+                    <p>União da Vitória - PR</p>
+                    <div class="beleza-actions">
+                        <a href="https://www.instagram.com/skarlathy.beauty" class="btn-beleza">Instagram</a>
+                        <a href="https://wa.me/5546988046480" class="btn-beleza">Agendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beleza-card">
+                <img src="img/maquiagem3.jpg">
+                <div class="beleza-info">
+                    <h3>Caroline Branco Ewerling</h3>
+                    <p>Cosmeto e Estética - Maquiadora</p>
+                    <p>União da Vitória - PR</p>
+                    <div class="beleza-actions">
+                        <a href="https://www.instagram.com/eelainececchin" class="btn-beleza">Instagram</a>
+                        <a href="https://wa.me/5542998004460" class="btn-beleza">Agendar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="ondeficar">
+        <h1>Onde Ficar</h1>
+        <div class="hoteis-grid">
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://hotel-san-marinho.hoteisdoparana.com/data/Images/OriginalPhoto/15911/1591168/1591168827/image-uniao-da-vitoria-hotel-san-marinho-10.JPEG');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel San Marinho</h3>
+                    <p>Distância do evento: 5 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://www.google.com/travel/search?ts=CAESCgoCCAMKAggDEAAaHBIaEhQKBwjqDxACGBoSBwjqDxACGBsYATICEAAqBwoFOgNCUkw&qs=CAEyE0Nnb0l6cldKamZ5UnctOWpFQUU4CkIJEe4B1sjsFT9gQgkRbDCrn_GzG5ZCCRE5zwgX3dCSslpPMk2qAUoQASoJIgVob3RlbCgMMh8QASIb2llf989GS3flpdJPBg3FG4KHwepdyEBYOrhVMhoQAiIWaG90ZWwgdW5pYW8gZGEgdml0b3JpYQ&utm_campaign=sharing&utm_medium=link_btn&utm_source=htls"
+                            target="_blank" class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+554231353777" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/283729277.jpg?k=b7f87362c4368c604efe98cef69aff50226215497e961a93815ab505cb7bc1f7&o=');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel 10</h3>
+                    <p>Distância do evento: 10 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/2kNQqpepqWCVS4hA6" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+5504235211010" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/652677797.jpg?k=ef15c24619749986199a07a2c140d51d77ea04b7008c5732b0d540e16b85ffed&o=');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel Riad</h3>
+                    <p>Distância do evento: 5 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/6WBeBftVBhJoKa966" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+5504235211600" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://hotel-aris.hoteisdoparana.com/data/Images/OriginalPhoto/16371/1637183/1637183484/image-uniao-da-vitoria-hotel-aris-1.JPEG');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel Aris</h3>
+                    <p>Distância do evento: 6 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/nqyREWbi4auQCGYF7" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+5542988710434" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato-e-recados">
+        <div class="bloco-contato">
+            <h1 class="titulo-secao">Contato</h1>
+            <p class="subtitulo">Dúvidas? Fale conosco!</p>
+
+            <div class="contato-grid">
+                <div class="contato-card">
+                    <span class="emoji">👰‍♀️</span>
+                    <h3>Falar com a Noiva</h3>
+                    <a href="https://wa.link/rkgfck" target="_blank" class="btn-whats">WhatsApp da <br>Catia</a>
+                </div>
+                <div class="contato-card">
+                    <span class="emoji">🤵‍♂️</span>
+                    <h3>Falar com o Noivo</h3>
+                    <a href="https://wa.link/qzcoxd" target="_blank" class="btn-whats">WhatsApp do <br>Marlon</a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divisor">
+
+        <div class="bloco-mensagens">
+            <div class="form-container">
+                <h1 class="titulo-secao">Deixe um Recado</h1>
+                <p class="subtitulo">Sua mensagem será enviada diretamente para o nosso e-mail!</p>
+
+                <form action="https://formspree.io/f/seu-codigo" method="POST" class="form-mensagem">
+                    <input type="text" name="nome" placeholder="Seu Nome" required>
+                    <textarea name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                    <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p class="footer-logo">Marlon e Catia</p>
+            <p class="footer-data">31 de Outubro de 2026 • Todos os Direitos Reservados ©</p>
+        </footer>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("active");
+        }
+
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("active");
+        }
+
+        // Seleciona o header e a primeira seção
+        const header = document.querySelector("header");
+        const sectionInicio = document.querySelector("#inicio");
+
+        // Configura o observador
+        const observerOptions = {
+            root: null, // monitora a viewport (janela do navegador)
+            threshold: 0.1, // aciona quando apenas 10% da seção inicial ainda está visível
+            rootMargin: "-80px 0px 0px 0px" // desconta a altura do header para o cálculo
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Se NÃO estiver mais intersectando (ou seja, saiu do topo)
+                if (!entry.isIntersecting) {
+                    header.classList.add("scrolled");
+                } else {
+                    header.classList.remove("scrolled");
+                }
+            });
+        }, observerOptions);
+
+        // Começa a observar a seção do buquê
+        observer.observe(sectionInicio);
+
+        // Define a data do casamento
+        const dataCasamento = new Date("Oct 31, 2026 00:00:00").getTime();
+
+        function configurarRoleta() {
+            const agora = new Date().getTime();
+            const distancia = dataCasamento - agora;
+
+            const valores = {
+                "dias-track": Math.floor(distancia / (1000 * 60 * 60 * 24)),
+                "horas-track": Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                "minutos-track": Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60))
+            };
+
+            for (let id in valores) {
+                const track = document.getElementById(id);
+                const valorFinal = valores[id];
+
+                // Detecta a altura real da janela (pode ser 80 ou 60 dependendo do CSS)
+                const windowHeight = track.parentElement.offsetHeight;
+
+                let htmlPilha = "";
+                for (let i = 0; i <= valorFinal; i++) {
+                    // Aplica a altura dinâmica em cada span também
+                    htmlPilha += `<span style="height: ${windowHeight}px">${i}</span>`;
+                }
+                track.innerHTML = htmlPilha;
+
+                setTimeout(() => {
+                    const deslocamento = valorFinal * windowHeight;
+                    track.style.transform = `translateY(-${deslocamento}px)`;
+                }, 100);
+            }
+        }
+
+        // Inicia ao carregar
+        window.addEventListener('load', configurarRoleta);
+
+        let paginaAtual = 1;
+        const itensPorPagina = 8;
+        const grid = document.getElementById('lista-presentes');
+        const cards = Array.from(grid.getElementsByClassName('presente-card'));
+
+        function mostrarPagina(pagina, scroll = true) { // Adicionamos o parâmetro 'scroll'
+            const totalPaginas = Math.ceil(cards.length / itensPorPagina);
+
+            if (pagina < 1) pagina = 1;
+            if (pagina > totalPaginas) pagina = totalPaginas;
+
+            paginaAtual = pagina;
+
+            cards.forEach((card, index) => {
+                card.style.display = "none";
+                if (index >= (pagina - 1) * itensPorPagina && index < pagina * itensPorPagina) {
+                    card.style.display = "block";
+                }
+            });
+
+            document.getElementById('pageIndicator').innerText = `Página ${paginaAtual} de ${totalPaginas}`;
+            document.getElementById('prevBtn').disabled = (paginaAtual === 1);
+            document.getElementById('nextBtn').disabled = (paginaAtual === totalPaginas);
+
+            // SÓ FAZ O SCROLL SE O PARÂMETRO FOR TRUE
+            if (scroll) {
+                document.getElementById('presentes').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Quando clicar nos botões, o scroll continua funcionando (passa true)
+        function mudarPagina(direcao) {
+            mostrarPagina(paginaAtual + direcao, true);
+        }
+
+        // AO CARREGAR O SITE, PASSAMOS 'FALSE' PARA NÃO PULAR
+        window.addEventListener('load', () => mostrarPagina(1, false));
+    </script>
+
+</body>
+
+</html>
