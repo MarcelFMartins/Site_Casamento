@@ -93,7 +93,7 @@
 
         #inicio {
             position: relative;
-            background-image: url('buque.png');
+            background-image: url('img/19.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -127,7 +127,6 @@
             font-weight: normal;
             letter-spacing: 10px;
             color: white;
-            -webkit-background-clip: text;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
         }
 
@@ -338,6 +337,7 @@
             max-width: 1200px;
             margin: 0 auto;
             min-height: 800px;
+            /* Ajuste esse valor para a altura média de duas fileiras de produtos */
         }
 
         .presente-card {
@@ -366,6 +366,7 @@
         .btn-comprar {
             display: inline-block;
             background: #455217;
+            /* Verde oliva do seu tema */
             color: white;
             padding: 10px 20px;
             text-decoration: none;
@@ -440,6 +441,7 @@
             background: white;
             border-radius: 20px;
             padding: 40px 20px 30px 20px;
+            /* espaço para a foto */
             text-align: center;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transition: 0.4s;
@@ -453,11 +455,15 @@
             width: 140px;
             height: 140px;
             border-radius: 50%;
+            /* deixa redonda */
             object-fit: cover;
+            /* corta sem distorcer */
             object-position: center;
+            /* centraliza o rosto */
             margin: 0 auto 20px auto;
             display: block;
             border: 4px solid #f3f3f3;
+            /* opcional - borda suave */
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         }
 
@@ -589,6 +595,7 @@
             color: white;
         }
 
+        /* Ajuste para mobile */
         @media (max-width: 600px) {
             .hotel-actions {
                 flex-direction: column;
@@ -601,6 +608,7 @@
 
         /* ================= CONTATO ==================== */
 
+        /* Container Principal */
         #contato-e-recados {
             background-color: #f9f9f9;
             padding-top: 80px;
@@ -613,6 +621,7 @@
             margin: 0 auto;
         }
 
+        /* Títulos e Subtítulos */
         .titulo-secao {
             font-family: 'PinyonScript', cursive;
             font-size: 3rem;
@@ -628,6 +637,7 @@
             margin-bottom: 20px;
         }
 
+        /* Grid de Contato */
         .contato-grid {
             display: flex;
             justify-content: center;
@@ -657,6 +667,7 @@
             transition: 0.3s;
         }
 
+        /* Divisor Visual */
         .divisor {
             border: 0;
             height: 1px;
@@ -664,6 +675,7 @@
             margin: 40px 0;
         }
 
+        /* Formulário */
         .form-container {
             max-width: 600px;
             margin: 0 auto;
@@ -695,6 +707,7 @@
             transition: 0.3s;
         }
 
+        /* Footer Integrado */
         .main-footer {
             padding: 40px 20px;
             background-color: #455217;
@@ -715,6 +728,7 @@
             margin-top: 5px;
         }
 
+        /* Responsivo */
         @media (max-width: 600px) {
             .titulo-secao {
                 font-size: 3rem;
@@ -745,7 +759,7 @@
 
             nav ul {
                 position: absolute;
-                top: 50px;
+                top: 70px;
                 left: 0;
                 width: 100%;
                 background: white;
@@ -796,6 +810,7 @@
         @media (max-width: 850px) {
             .flex-locais {
                 flex-direction: column;
+                /* Empilha um embaixo do outro no celular */
                 align-items: center;
                 gap: 60px;
                 margin-top: 70px;
@@ -803,25 +818,31 @@
 
             .imagens {
                 max-width: 100%;
+                /* Ocupa a largura total disponível */
             }
 
             .imagens img {
                 height: auto;
+                /* Mantém a proporção da imagem */
                 max-height: 400px;
             }
 
+            /* Remove o espaçamento exagerado na imagem da cerimônia no mobile */
             .imagens img[style*="margin-top: 80px"] {
                 margin-top: 20px !important;
             }
         }
 
+        /* --- Ajuste no Countdown para telas muito pequenas --- */
         @media (max-width: 480px) {
             .window {
                 height: 60px;
+                /* Altura reduzida para mobile */
             }
 
             .tracker span {
                 height: 60px;
+                /* Garante que o span acompanhe a janela */
                 font-size: 2.5rem;
             }
         }
@@ -831,6 +852,202 @@
                 width: 100%;
                 height: 400px;
             }
+        }
+
+        /* ================= MURAL DE RECADOS ================= */
+
+        .mural-recados-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 80px 20px;
+        }
+
+        .mural-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .recado-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .recado-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .recado-header {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .recado-header h4 {
+            color: #455217;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .recado-header small {
+            color: #999;
+            font-size: 0.8rem;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .recado-texto {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-family: 'Raleway', sans-serif;
+            font-style: italic;
+            /* Dá um toque de carta/recado escrito */
+        }
+
+        /* Responsivo para o mural */
+        @media (max-width: 600px) {
+            .mural-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #inicio {
+                background-image: url('img/1.jpg');
+                background-position: center;
+                background-size: cover;
+            }
+        }
+
+        #presentes {
+            padding: 80px 0;
+        }
+
+        #presentes h1 {
+            margin-bottom: 60px;
+            margin-top: 20px;
+        }
+
+        .presentes-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .card-presente {
+            width: 420px;
+            height: 520px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            background: rgba(0, 0, 0, 0.35);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .qrcode {
+            width: 180px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+
+        .icone-presente {
+            width: 120px;
+            margin: 20px 0;
+        }
+
+        .btn-presente {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            background: #d6d3a1;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-presente:hover {
+            background: #c5c28c;
+        }
+
+        .havan-icon {
+            font-size: 60px;
+            margin: 10px 0;
+        }
+
+        .texto-havan {
+            max-width: 250px;
+            margin: 10px 0 15px 0;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 600px) {
+
+            #presentes {
+                padding: 20px 10px;
+            }
+
+            .presentes-cards {
+                gap: 20px;
+                padding: 0 10px;
+            }
+
+            .card-presente {
+                width: 100%;
+                max-width: 350px;
+                height: auto;
+            }
+
+            .card-overlay {
+                padding: 15px;
+            }
+
+            .qrcode {
+                width: 160px;
+            }
+
+            .card-img {
+                height: 450px;
+            }
+
         }
     </style>
 </head>
@@ -843,10 +1060,11 @@
             <ul id="menu">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#locais">Locais</a></li>
-                <li><a href="#presentes">Lista de Presentes</a></li>
-                <li><a href="#beleza">Maquiagem e Cabelo</a></li>
+                <li><a href="#presentes">Presentes</a></li>
                 <li><a href="#ondeficar">Onde Ficar</a></li>
+                <li><a href="#beleza">Maquiagem</a></li>
                 <li><a href="#contato-e-recados">Contato</a></li>
+                <li><a href="#muralrec">Mural de Recados</a></li>
             </ul>
         </nav>
     </header>
@@ -928,214 +1146,141 @@
     </section>
 
     <section id="presentes">
-        <h1>Lista de Presentes</h1>
-        <div class="lista-grid" id="lista-presentes">
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689         " target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689         " target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689         " target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
-            </div>
-            <div class="presente-card">
-                <img src="https://lista.havan.com.br/api/imagem/produto/fbda6673-479c-472b-bc42-e196abc03b18?id=947732"
-                    alt="Jogo de Pratos">
-                <h3>Jogo de Pratos</h3>
-                <p>R$ 199,90</p>
-                <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/913689" target="_blank"
-                    class="btn-comprar">Presentear</a>
+        <h1>Presentes</h1>
+        <div class="presentes-cards">
+            <div class="card-presente">
+                <img src="img/4.jpg" class="card-img">
+                <div class="card-overlay">
+                    <h2>Presente via PIX</h2>
+                    <img src="img/qrcode.png" class="qrcode">
+                    <p id="chavePix">085.570.939-18</p>
+                    <button class="btn-presente" onclick="copiarPix()">
+                        Copiar chave PIX
+                    </button>
+                </div>
             </div>
 
+            <div class="card-presente">
+                <img src="img/fundo2.jpg" class="card-img">
+                <div class="card-overlay">
+                    <h2>Lista de Presentes</h2>
+                    <div class="havan-icon">
 
-
-
-        </div>
-
-        <div class="paginacao">
-            <button id="prevBtn" onclick="mudarPagina(-1)">❮ Anterior</button>
-            <span id="pageIndicator">Página 1</span>
-            <button id="nextBtn" onclick="mudarPagina(1)">Próximo ❯</button>
-        </div>
+                    </div>
+                    <p class="texto-havan">
+                        Criamos uma lista especial na Havan
+                        para quem quiser nos presentear.
+                    </p>
+                    <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/920369" target="_blank">
+                        <button class="btn-presente">
+                            Acessar lista
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
+    <section id="ondeficar">
+        <h1>Onde Ficar</h1>
+        <div class="hoteis-grid">
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://hotel-san-marinho.hoteisdoparana.com/data/Images/OriginalPhoto/15911/1591168/1591168827/image-uniao-da-vitoria-hotel-san-marinho-10.JPEG');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel San Marinho</h3>
+                    <p>Distância do evento: 5 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://www.google.com/travel/search?ts=CAESCgoCCAMKAggDEAAaHBIaEhQKBwjqDxACGBoSBwjqDxACGBsYATICEAAqBwoFOgNCUkw&qs=CAEyE0Nnb0l6cldKamZ5UnctOWpFQUU4CkIJEe4B1sjsFT9gQgkRbDCrn_GzG5ZCCRE5zwgX3dCSslpPMk2qAUoQASoJIgVob3RlbCgMMh8QASIb2llf989GS3flpdJPBg3FG4KHwepdyEBYOrhVMhoQAiIWaG90ZWwgdW5pYW8gZGEgdml0b3JpYQ&utm_campaign=sharing&utm_medium=link_btn&utm_source=htls"
+                            target="_blank" class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+554231353777" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/283729277.jpg?k=b7f87362c4368c604efe98cef69aff50226215497e961a93815ab505cb7bc1f7&o=');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel 10</h3>
+                    <p>Distância do evento: 10 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/2kNQqpepqWCVS4hA6" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+5504235211010" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/652677797.jpg?k=ef15c24619749986199a07a2c140d51d77ea04b7008c5732b0d540e16b85ffed&o=');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel Riad</h3>
+                    <p>Distância do evento: 5 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/6WBeBftVBhJoKa966" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+5504235211600" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://hotel-aris.hoteisdoparana.com/data/Images/OriginalPhoto/16371/1637183/1637183484/image-uniao-da-vitoria-hotel-aris-1.JPEG');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel Aris</h3>
+                    <p>Distância do evento: 6 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/nqyREWbi4auQCGYF7" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+5542988710434" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://lh3.googleusercontent.com/gps-cs-s/AHVAwerOc0szH0UwjGh3wPI0CgBXbe2No0zd6iwlc5O2WQsfd_kPdzGMELYuAsW0n873JQ0qqzNsUq_QZnMVhJ1hww_CiIxBXW2Rx9JG8Vm5PK6Bkfv-OBYqxyZBSDh6h0Qv2AXgC6uz=w408-h611-k-no');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Hotel San Rafael</h3>
+                    <p>Distância do evento: 5 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/7PhRfNyFqvFZPoG99" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+554235224344" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img"
+                    style="background-image: url('https://images3.motor-reserva.com.br/curl/motor_reserva/images/galeria_foto/cliente_2581/202201311643658451galeria04.jpg');">
+                </div>
+                <div class="hotel-info">
+                    <h3>Novo Hotel Iguaçu</h3>
+                    <p>Distância do evento: 4 min</p>
+                    <div class="hotel-actions">
+                        <a href="https://maps.app.goo.gl/XoXssRapGt73gsfe8" target="_blank"
+                            class="btn-hotel">Localização</a>
+                        <a href="https://wa.me/+554235221733" target="_blank"
+                            class="btn-hotel btn-whatsapp">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="beleza">
         <h1>Maquiagem e Cabelo</h1>
@@ -1224,74 +1369,7 @@
         </div>
     </section>
 
-    <section id="ondeficar">
-        <h1>Onde Ficar</h1>
-        <div class="hoteis-grid">
-            <div class="hotel-card">
-                <div class="hotel-img"
-                    style="background-image: url('https://hotel-san-marinho.hoteisdoparana.com/data/Images/OriginalPhoto/15911/1591168/1591168827/image-uniao-da-vitoria-hotel-san-marinho-10.JPEG');">
-                </div>
-                <div class="hotel-info">
-                    <h3>Hotel San Marinho</h3>
-                    <p>Distância do evento: 5 min</p>
-                    <div class="hotel-actions">
-                        <a href="https://www.google.com/travel/search?ts=CAESCgoCCAMKAggDEAAaHBIaEhQKBwjqDxACGBoSBwjqDxACGBsYATICEAAqBwoFOgNCUkw&qs=CAEyE0Nnb0l6cldKamZ5UnctOWpFQUU4CkIJEe4B1sjsFT9gQgkRbDCrn_GzG5ZCCRE5zwgX3dCSslpPMk2qAUoQASoJIgVob3RlbCgMMh8QASIb2llf989GS3flpdJPBg3FG4KHwepdyEBYOrhVMhoQAiIWaG90ZWwgdW5pYW8gZGEgdml0b3JpYQ&utm_campaign=sharing&utm_medium=link_btn&utm_source=htls"
-                            target="_blank" class="btn-hotel">Localização</a>
-                        <a href="https://wa.me/+554231353777" target="_blank"
-                            class="btn-hotel btn-whatsapp">Reservar</a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="hotel-card">
-                <div class="hotel-img"
-                    style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/283729277.jpg?k=b7f87362c4368c604efe98cef69aff50226215497e961a93815ab505cb7bc1f7&o=');">
-                </div>
-                <div class="hotel-info">
-                    <h3>Hotel 10</h3>
-                    <p>Distância do evento: 10 min</p>
-                    <div class="hotel-actions">
-                        <a href="https://maps.app.goo.gl/2kNQqpepqWCVS4hA6" target="_blank"
-                            class="btn-hotel">Localização</a>
-                        <a href="https://wa.me/+5504235211010" target="_blank"
-                            class="btn-hotel btn-whatsapp">Reservar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hotel-card">
-                <div class="hotel-img"
-                    style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/652677797.jpg?k=ef15c24619749986199a07a2c140d51d77ea04b7008c5732b0d540e16b85ffed&o=');">
-                </div>
-                <div class="hotel-info">
-                    <h3>Hotel Riad</h3>
-                    <p>Distância do evento: 5 min</p>
-                    <div class="hotel-actions">
-                        <a href="https://maps.app.goo.gl/6WBeBftVBhJoKa966" target="_blank"
-                            class="btn-hotel">Localização</a>
-                        <a href="https://wa.me/+5504235211600" target="_blank"
-                            class="btn-hotel btn-whatsapp">Reservar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hotel-card">
-                <div class="hotel-img"
-                    style="background-image: url('https://hotel-aris.hoteisdoparana.com/data/Images/OriginalPhoto/16371/1637183/1637183484/image-uniao-da-vitoria-hotel-aris-1.JPEG');">
-                </div>
-                <div class="hotel-info">
-                    <h3>Hotel Aris</h3>
-                    <p>Distância do evento: 6 min</p>
-                    <div class="hotel-actions">
-                        <a href="https://maps.app.goo.gl/nqyREWbi4auQCGYF7" target="_blank"
-                            class="btn-hotel">Localização</a>
-                        <a href="https://wa.me/+5542988710434" target="_blank"
-                            class="btn-hotel btn-whatsapp">Reservar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section id="contato-e-recados">
         <div class="bloco-contato">
@@ -1317,13 +1395,20 @@
         <div class="bloco-mensagens">
             <div class="form-container">
                 <h1 class="titulo-secao">Deixe um Recado</h1>
-                <p class="subtitulo">Sua mensagem será enviada diretamente para o nosso e-mail!</p>
+                <p class="subtitulo">Sua mensagem será exibida no nosso site!</p>
 
-                <form action="https://formspree.io/f/seu-codigo" method="POST" class="form-mensagem">
-                    <input type="text" name="nome" placeholder="Seu Nome" required>
-                    <textarea name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                <form id="formRecado" class="form-mensagem">
+                    <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
+                    <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..."
+                        required></textarea>
                     <button type="submit" class="btn-enviar">Enviar Mensagem</button>
                 </form>
+            </div>
+        </div>
+
+        <div class="mural-recados-container">
+            <h2 class="titulo-secao" id="muralrec">Mural de Carinho</h2>
+            <div id="mural-recados" class="mural-grid">
             </div>
         </div>
 
@@ -1334,21 +1419,35 @@
     </section>
 
     <script>
+        // Removi a função repetida, deixei só uma
         function toggleMenu() {
             document.getElementById("menu").classList.toggle("active");
         }
 
-        function toggleMenu() {
-            document.getElementById("menu").classList.toggle("active");
+        function copiarPix() {
+            var texto = document.getElementById("chavePix").innerText;
+
+            var input = document.createElement("input");
+            input.value = texto;
+            document.body.appendChild(input);
+
+            input.select();
+            document.execCommand("copy");
+
+            document.body.removeChild(input);
+
+            alert("Chave PIX copiada!");
         }
 
+        // Seleciona o header e a primeira seção
         const header = document.querySelector("header");
         const sectionInicio = document.querySelector("#inicio");
 
+        // Configura o observador
         const observerOptions = {
-            root: null, 
-            threshold: 0.1, 
-            rootMargin: "-80px 0px 0px 0px" 
+            root: null,
+            threshold: 0.1,
+            rootMargin: "-80px 0px 0px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1363,6 +1462,7 @@
 
         observer.observe(sectionInicio);
 
+        // Define a data do casamento
         const dataCasamento = new Date("Oct 31, 2026 00:00:00").getTime();
 
         function configurarRoleta() {
@@ -1378,7 +1478,6 @@
             for (let id in valores) {
                 const track = document.getElementById(id);
                 const valorFinal = valores[id];
-
                 const windowHeight = track.parentElement.offsetHeight;
 
                 let htmlPilha = "";
@@ -1396,44 +1495,58 @@
 
         window.addEventListener('load', configurarRoleta);
 
-        let paginaAtual = 1;
-        const itensPorPagina = 8;
-        const grid = document.getElementById('lista-presentes');
-        const cards = Array.from(grid.getElementsByClassName('presente-card'));
+        // Função para carregar as mensagens do banco de dados
+        function carregarRecados() {
+            fetch('recados.php')
+                .then(response => response.json())
+                .then(data => {
+                    const mural = document.getElementById('mural-recados');
+                    if (mural) mural.innerHTML = '';
 
-        function mostrarPagina(pagina, scroll = true) { 
-            const totalPaginas = Math.ceil(cards.length / itensPorPagina);
+                    data.forEach(recado => {
+                        const recadoHTML = `
+                            <div class="recado-card">
+                                <div class="recado-header">
+                                    <h4>${recado.nome}</h4>
+                                    <small>${recado.data}</small>
+                                </div>
+                                <div class="recado-texto">
+                                    "${recado.mensagem}"
+                                </div>
+                            </div>
+                        `;
+                        if (mural) mural.innerHTML += recadoHTML;
+                    });
+                })
+                .catch(error => console.error('Erro ao carregar recados:', error));
+        }
 
-            if (pagina < 1) pagina = 1;
-            if (pagina > totalPaginas) pagina = totalPaginas;
+        const formRecado = document.getElementById('formRecado');
+        if (formRecado) {
+            formRecado.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
 
-            paginaAtual = pagina;
-
-            cards.forEach((card, index) => {
-                card.style.display = "none";
-                if (index >= (pagina - 1) * itensPorPagina && index < pagina * itensPorPagina) {
-                    card.style.display = "block";
-                }
+                fetch('recados.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.sucesso) {
+                            alert('Recado enviado com sucesso! Muito obrigado!');
+                            this.reset();
+                            carregarRecados();
+                        } else {
+                            alert('Erro ao enviar recado. Tente novamente.');
+                        }
+                    });
             });
-
-            document.getElementById('pageIndicator').innerText = `Página ${paginaAtual} de ${totalPaginas}`;
-            document.getElementById('prevBtn').disabled = (paginaAtual === 1);
-            document.getElementById('nextBtn').disabled = (paginaAtual === totalPaginas);
-
-            if (scroll) {
-                document.getElementById('presentes').scrollIntoView({ behavior: 'smooth' });
-            }
         }
 
-        function mudarPagina(direcao) {
-            mostrarPagina(paginaAtual + direcao, true);
-        }
-
-        window.addEventListener('load', () => mostrarPagina(1, false));
+        window.addEventListener("load", carregarRecados);
     </script>
 
 </body>
 
-
 </html>
-
