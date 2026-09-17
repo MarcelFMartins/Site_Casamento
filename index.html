@@ -443,24 +443,28 @@
             align-items: center;
         }
 
-        .window {
-            height: 96px;
-            overflow: hidden;
-            padding: 0 14px;
+        .digit-group {
+            display: flex;
+            gap: 4px;
         }
 
-        .tracker {
+        .digit-window {
+            height: 96px;
+            width: 46px;
+            overflow: hidden;
+        }
+
+        .digit-tracker {
             display: flex;
             flex-direction: column;
-            transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        #segundos-track,
-        #minutos-track {
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .digit-group-fast .digit-tracker {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .tracker span {
+        .digit-tracker span {
             height: 96px;
             font-size: 4.2rem;
             font-family: 'Cormorant Garamond', serif;
@@ -1063,13 +1067,18 @@
         }
 
         @media (max-width: 480px) {
-            .window {
+            .digit-window {
                 height: 68px;
+                width: 34px;
             }
 
-            .tracker span {
+            .digit-tracker span {
                 height: 68px;
                 font-size: 2.9rem;
+            }
+
+            .digit-group {
+                gap: 2px;
             }
 
             #countdown {
@@ -1344,7 +1353,6 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
-            <span class="hero-eyebrow">Nós vamos nos casar</span>
             <h1>Marlon e Catia</h1>
             <p>31 · 10 · 2026</p>
             <div class="hero-ornament"></div>
@@ -1365,27 +1373,19 @@
 
             <div id="countdown">
                 <div class="tempo">
-                    <div class="window">
-                        <div id="dias-track" class="tracker"></div>
-                    </div>
+                    <div id="dias-digits" class="digit-group"></div>
                     <small>Dias</small>
                 </div>
                 <div class="tempo">
-                    <div class="window">
-                        <div id="horas-track" class="tracker"></div>
-                    </div>
+                    <div id="horas-digits" class="digit-group"></div>
                     <small>Horas</small>
                 </div>
                 <div class="tempo">
-                    <div class="window">
-                        <div id="minutos-track" class="tracker"></div>
-                    </div>
+                    <div id="minutos-digits" class="digit-group digit-group-fast"></div>
                     <small>Minutos</small>
                 </div>
                 <div class="tempo">
-                    <div class="window">
-                        <div id="segundos-track" class="tracker"></div>
-                    </div>
+                    <div id="segundos-digits" class="digit-group digit-group-fast"></div>
                     <small>Segundos</small>
                 </div>
             </div>
@@ -1790,40 +1790,59 @@
         const ultimoValor = {};
         const alturaCache = {};
 
+        function construirDigito(windowHeight) {
+            const slot = document.createElement('div');
+            slot.className = 'digit-window';
+            const tracker = document.createElement('div');
+            tracker.className = 'digit-tracker';
+            for (let i = 0; i <= 9; i++) {
+                const span = document.createElement('span');
+                span.style.height = windowHeight + 'px';
+                span.textContent = i;
+                tracker.appendChild(span);
+            }
+            slot.appendChild(tracker);
+            return slot;
+        }
+
+        function atualizarUnidade(containerId, valorFinal, minDigitos) {
+            const valorStr = String(valorFinal).padStart(minDigitos, '0');
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const windowHeight = alturaCache[containerId] || (window.innerWidth <= 480 ? 68 : 96);
+            alturaCache[containerId] = windowHeight;
+
+            while (container.children.length < valorStr.length) {
+                container.appendChild(construirDigito(windowHeight));
+            }
+            while (container.children.length > valorStr.length) {
+                container.removeChild(container.lastChild);
+            }
+
+            for (let i = 0; i < valorStr.length; i++) {
+                const digito = parseInt(valorStr[i], 10);
+                const tracker = container.children[i].querySelector('.digit-tracker');
+                tracker.style.transform = `translateY(-${digito * windowHeight}px)`;
+            }
+        }
+
         function configurarRoleta() {
             const agora = new Date().getTime();
             const distancia = Math.max(0, dataCasamento - agora);
 
             const valores = {
-                "dias-track": Math.floor(distancia / (1000 * 60 * 60 * 24)),
-                "horas-track": Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                "minutos-track": Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60)),
-                "segundos-track": Math.floor((distancia % (1000 * 60)) / 1000)
+                "dias-digits": [Math.floor(distancia / (1000 * 60 * 60 * 24)), 2],
+                "horas-digits": [Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)), 2],
+                "minutos-digits": [Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60)), 2],
+                "segundos-digits": [Math.floor((distancia % (1000 * 60)) / 1000), 2]
             };
 
             for (let id in valores) {
-                const valorFinal = valores[id];
+                const [valorFinal, minDigitos] = valores[id];
                 if (ultimoValor[id] === valorFinal) continue;
                 ultimoValor[id] = valorFinal;
-
-                const track = document.getElementById(id);
-                let windowHeight = alturaCache[id];
-                if (!windowHeight) {
-                    windowHeight = track.parentElement.offsetHeight;
-                    if (windowHeight > 0) alturaCache[id] = windowHeight;
-                }
-                if (!windowHeight) continue;
-
-                let htmlPilha = "";
-                for (let i = 0; i <= valorFinal; i++) {
-                    htmlPilha += `<span style="height: ${windowHeight}px">${i}</span>`;
-                }
-                track.innerHTML = htmlPilha;
-
-                setTimeout(() => {
-                    const deslocamento = valorFinal * windowHeight;
-                    track.style.transform = `translateY(-${deslocamento}px)`;
-                }, 50);
+                atualizarUnidade(id, valorFinal, minDigitos);
             }
         }
 
