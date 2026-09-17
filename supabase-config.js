@@ -2,8 +2,8 @@
 // Substitua os valores abaixo pelos dados do SEU projeto Supabase.
 // Veja o passo a passo em SUPABASE-SETUP.md
 
-const SUPABASE_URL = 'COLE_AQUI_A_URL_DO_SEU_PROJETO';
-const SUPABASE_ANON_KEY = 'COLE_AQUI_A_ANON_KEY_DO_SEU_PROJETO';
+const SUPABASE_URL = 'https://feeqsjyrranzkzxhrdfk.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_prcELrYp6NFT3X_Ww88LzA_tHuw61al';
 
 window.supabaseClient =
     SUPABASE_URL.startsWith('http') && SUPABASE_ANON_KEY.length > 10
