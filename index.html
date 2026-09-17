@@ -455,6 +455,11 @@
             transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        #segundos-track,
+        #minutos-track {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         .tracker span {
             height: 96px;
             font-size: 4.2rem;
@@ -637,6 +642,11 @@
             display: block;
             border: 4px solid var(--creme-escuro);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+            transition: transform 0.5s ease;
+        }
+
+        .beleza-card:hover img {
+            transform: scale(1.08);
         }
 
         .beleza-info {
@@ -700,8 +710,8 @@
 
         .hoteis-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -722,9 +732,14 @@
         }
 
         .hotel-img {
-            height: 220px;
+            height: 190px;
             background-size: cover;
             background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .hotel-card:hover .hotel-img {
+            transform: scale(1.08);
         }
 
         .hotel-info {
@@ -740,10 +755,13 @@
         }
 
         .hotel-info p {
-            color: var(--texto-claro);
-            font-size: 0.9rem;
+            display: inline-block;
+            color: var(--dourado);
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             margin-bottom: 22px;
-            font-weight: 300;
+            font-weight: 500;
         }
 
         .hotel-actions {
@@ -776,6 +794,12 @@
 
         .btn-whatsapp:hover {
             background: var(--verde-escuro);
+        }
+
+        @media (max-width: 980px) {
+            .hoteis-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* Ajuste para mobile */
@@ -1047,6 +1071,12 @@
                 height: 68px;
                 font-size: 2.9rem;
             }
+
+            #countdown {
+                gap: 22px;
+                row-gap: 20px;
+                flex-wrap: wrap;
+            }
         }
 
         @media(max-width:768px) {
@@ -1184,6 +1214,103 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ================= GALERIA ================= */
+
+        #galeria {
+            padding: 110px 20px 100px;
+            background-color: var(--creme-escuro);
+        }
+
+        #galeria h1 {
+            font-family: 'PinyonScript';
+            font-size: 3.6rem;
+            color: var(--verde);
+            text-align: center;
+            font-weight: normal;
+            margin-top: 20px;
+        }
+
+        .galeria-grid {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            column-count: 4;
+            column-gap: 22px;
+        }
+
+        .galeria-item {
+            break-inside: avoid;
+            margin-bottom: 22px;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(59, 55, 30, 0.1);
+            cursor: pointer;
+        }
+
+        .galeria-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.07);
+        }
+
+        @media (max-width: 980px) {
+            .galeria-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .galeria-grid {
+                column-count: 2;
+                column-gap: 14px;
+            }
+
+            .galeria-item {
+                margin-bottom: 14px;
+            }
+        }
+
+        .galeria-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 18, 12, 0.94);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .galeria-lightbox.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .galeria-lightbox img {
+            max-height: 88vh;
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .galeria-lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -1200,6 +1327,7 @@
                 <li><a href="#beleza">Maquiagem</a></li>
                 <li><a href="#contato-e-recados">Contato</a></li>
                 <li><a href="#muralrec">Mural de Recados</a></li>
+                <li><a href="#galeria">Galeria</a></li>
             </ul>
         </nav>
     </header>
@@ -1253,6 +1381,12 @@
                         <div id="minutos-track" class="tracker"></div>
                     </div>
                     <small>Minutos</small>
+                </div>
+                <div class="tempo">
+                    <div class="window">
+                        <div id="segundos-track" class="tracker"></div>
+                    </div>
+                    <small>Segundos</small>
                 </div>
             </div>
 
@@ -1571,12 +1705,24 @@
             <div id="mural-recados" class="mural-grid">
             </div>
         </div>
-
-        <footer class="main-footer">
-            <p class="footer-logo">Marlon e Catia</p>
-            <p class="footer-data">31 de Outubro de 2026 • Todos os Direitos Reservados ©</p>
-        </footer>
     </section>
+
+    <section id="galeria">
+        <span class="eyebrow">Registros</span>
+        <h1>Nossos Registros</h1>
+        <div class="ornament"><span>✦</span></div>
+        <div class="galeria-grid" id="galeriaGrid"></div>
+    </section>
+
+    <footer class="main-footer">
+        <p class="footer-logo">Marlon e Catia</p>
+        <p class="footer-data">31 de Outubro de 2026 • Todos os Direitos Reservados ©</p>
+    </footer>
+
+    <div class="galeria-lightbox" id="galeriaLightbox">
+        <button class="galeria-lightbox-close" id="galeriaLightboxClose" aria-label="Fechar imagem">&times;</button>
+        <img id="galeriaLightboxImg" src="" alt="">
+    </div>
 
     <!-- Supabase JS SDK (mural de recados) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1641,20 +1787,32 @@
         // Define a data do casamento
         const dataCasamento = new Date("Oct 31, 2026 00:00:00").getTime();
 
+        const ultimoValor = {};
+        const alturaCache = {};
+
         function configurarRoleta() {
             const agora = new Date().getTime();
-            const distancia = dataCasamento - agora;
+            const distancia = Math.max(0, dataCasamento - agora);
 
             const valores = {
                 "dias-track": Math.floor(distancia / (1000 * 60 * 60 * 24)),
                 "horas-track": Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                "minutos-track": Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60))
+                "minutos-track": Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60)),
+                "segundos-track": Math.floor((distancia % (1000 * 60)) / 1000)
             };
 
             for (let id in valores) {
-                const track = document.getElementById(id);
                 const valorFinal = valores[id];
-                const windowHeight = track.parentElement.offsetHeight;
+                if (ultimoValor[id] === valorFinal) continue;
+                ultimoValor[id] = valorFinal;
+
+                const track = document.getElementById(id);
+                let windowHeight = alturaCache[id];
+                if (!windowHeight) {
+                    windowHeight = track.parentElement.offsetHeight;
+                    if (windowHeight > 0) alturaCache[id] = windowHeight;
+                }
+                if (!windowHeight) continue;
 
                 let htmlPilha = "";
                 for (let i = 0; i <= valorFinal; i++) {
@@ -1665,11 +1823,67 @@
                 setTimeout(() => {
                     const deslocamento = valorFinal * windowHeight;
                     track.style.transform = `translateY(-${deslocamento}px)`;
-                }, 100);
+                }, 50);
             }
         }
 
-        window.addEventListener('load', configurarRoleta);
+        window.addEventListener('load', () => {
+            configurarRoleta();
+            setInterval(configurarRoleta, 1000);
+        });
+
+        window.addEventListener('resize', () => {
+            for (let id in alturaCache) delete alturaCache[id];
+            for (let id in ultimoValor) delete ultimoValor[id];
+            configurarRoleta();
+        });
+
+        // ================== GALERIA ==================
+
+        const fotosGaleria = [
+            'img/casal-praia.jpg',
+            'img/casal-pedra.jpg',
+            'img/casal-maos.jpg',
+            'img/casal-vento.jpg',
+            'img/casal-caminhando.jpg',
+            'img/casal-beijomao.jpg',
+            'img/casal-igreja-novo.jpg',
+            'img/casal-deck.jpg'
+        ];
+
+        const galeriaGrid = document.getElementById('galeriaGrid');
+        if (galeriaGrid) {
+            galeriaGrid.innerHTML = fotosGaleria.map(src => `
+                <div class="galeria-item">
+                    <img src="${src}" alt="Marlon e Catia" loading="lazy">
+                </div>
+            `).join('');
+
+            const galeriaLightbox = document.getElementById('galeriaLightbox');
+            const galeriaLightboxImg = document.getElementById('galeriaLightboxImg');
+            const galeriaLightboxClose = document.getElementById('galeriaLightboxClose');
+
+            function abrirLightbox(src, alt) {
+                galeriaLightboxImg.src = src;
+                galeriaLightboxImg.alt = alt;
+                galeriaLightbox.classList.add('open');
+            }
+            function fecharLightbox() {
+                galeriaLightbox.classList.remove('open');
+                galeriaLightboxImg.src = '';
+            }
+
+            galeriaGrid.querySelectorAll('.galeria-item img').forEach(img => {
+                img.addEventListener('click', () => abrirLightbox(img.src, img.alt));
+            });
+            galeriaLightboxClose.addEventListener('click', fecharLightbox);
+            galeriaLightbox.addEventListener('click', (e) => {
+                if (e.target === galeriaLightbox) fecharLightbox();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') fecharLightbox();
+            });
+        }
 
         // ================== MURAL DE RECADOS (Supabase) ==================
 
