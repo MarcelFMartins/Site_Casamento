@@ -190,7 +190,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             opacity: 0;
-            transition: opacity 1.8s ease;
+            transition: opacity 1s ease;
         }
 
         .hero-slide.active {
@@ -215,6 +215,21 @@
         .slide-deck {
             background-image: url('img/casal-deck.jpg');
             background-position: center 50%;
+        }
+
+        .slide-caminhando {
+            background-image: url('img/casal-caminhando.jpg');
+            background-position: center 35%;
+        }
+
+        .slide-pedra {
+            background-image: url('img/casal-pedra.jpg');
+            background-position: center 26%;
+        }
+
+        .slide-beijomao {
+            background-image: url('img/casal-beijomao.jpg');
+            background-position: center 30%;
         }
 
         .hero-overlay {
@@ -1057,6 +1072,18 @@
             .slide-deck {
                 background-position: center 50%;
             }
+
+            .slide-caminhando {
+                background-position: center 25%;
+            }
+
+            .slide-pedra {
+                background-position: center 20%;
+            }
+
+            .slide-beijomao {
+                background-position: center 25%;
+            }
         }
 
         @media (max-width: 600px) {
@@ -1183,6 +1210,9 @@
             <div class="hero-slide slide-vento"></div>
             <div class="hero-slide slide-igreja"></div>
             <div class="hero-slide slide-deck"></div>
+            <div class="hero-slide slide-caminhando"></div>
+            <div class="hero-slide slide-pedra"></div>
+            <div class="hero-slide slide-beijomao"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
@@ -1567,7 +1597,7 @@
                 slides[atual].classList.remove('active');
                 atual = (atual + 1) % slides.length;
                 slides[atual].classList.add('active');
-            }, 5000);
+            }, 3000);
         })();
 
         function copiarPix() {
