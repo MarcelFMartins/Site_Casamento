@@ -172,16 +172,60 @@
 
         #inicio {
             position: relative;
-            background-image: linear-gradient(rgba(20, 22, 10, 0.25), rgba(20, 22, 10, 0.45)), url('img/casal-praia.jpg');
-            background-size: cover;
-            background-position: center 42%;
-            background-repeat: no-repeat;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        .hero-carousel {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.8s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .slide-praia {
+            background-image: url('img/casal-praia.jpg');
+            background-position: center 42%;
+        }
+
+        .slide-vento {
+            background-image: url('img/casal-vento.jpg');
+            background-position: center 30%;
+        }
+
+        .slide-igreja {
+            background-image: url('img/casal-igreja-novo.jpg');
+            background-position: center 60%;
+        }
+
+        .slide-deck {
+            background-image: url('img/casal-deck.jpg');
+            background-position: center 50%;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(20, 22, 10, 0.25), rgba(20, 22, 10, 0.45));
+            z-index: 1;
+        }
+
         #inicio .container {
+            z-index: 2;
             position: relative;
             height: 100%;
             display: flex;
@@ -998,8 +1042,20 @@
         }
 
         @media (max-width: 600px) {
-            #inicio {
-                background-position: center 12%;
+            .slide-praia {
+                background-position: center 15%;
+            }
+
+            .slide-vento {
+                background-position: center 20%;
+            }
+
+            .slide-igreja {
+                background-position: center 30%;
+            }
+
+            .slide-deck {
+                background-position: center 50%;
             }
         }
 
@@ -1122,6 +1178,13 @@
     </header>
 
     <section id="inicio">
+        <div class="hero-carousel" id="heroCarousel">
+            <div class="hero-slide slide-praia active"></div>
+            <div class="hero-slide slide-vento"></div>
+            <div class="hero-slide slide-igreja"></div>
+            <div class="hero-slide slide-deck"></div>
+        </div>
+        <div class="hero-overlay"></div>
         <div class="container">
             <span class="hero-eyebrow">Nós vamos nos casar</span>
             <h1>Marlon e Catia</h1>
@@ -1493,6 +1556,19 @@
         function toggleMenu() {
             document.getElementById("menu").classList.toggle("active");
         }
+
+        // ================== CARROSSEL DO HERO ==================
+        (function () {
+            const slides = document.querySelectorAll('#heroCarousel .hero-slide');
+            if (slides.length < 2) return;
+
+            let atual = 0;
+            setInterval(() => {
+                slides[atual].classList.remove('active');
+                atual = (atual + 1) % slides.length;
+                slides[atual].classList.add('active');
+            }, 5000);
+        })();
 
         function copiarPix() {
             var texto = document.getElementById("chavePix").innerText;
