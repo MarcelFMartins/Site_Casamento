@@ -1082,9 +1082,11 @@
             }
 
             #countdown {
-                gap: 22px;
-                row-gap: 20px;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: repeat(2, auto);
+                column-gap: 40px;
+                row-gap: 28px;
+                justify-content: center;
             }
         }
 
@@ -1280,6 +1282,12 @@
 
             .galeria-item {
                 margin-bottom: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .galeria-grid {
+                column-count: 1;
             }
         }
 
@@ -1785,7 +1793,7 @@
         observer.observe(sectionInicio);
 
         // Define a data do casamento
-        const dataCasamento = new Date("Oct 31, 2026 00:00:00").getTime();
+        const dataCasamento = new Date("Oct 31, 2026 16:30:00").getTime();
 
         const ultimoValor = {};
         const alturaCache = {};
