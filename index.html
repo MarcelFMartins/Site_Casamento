@@ -1263,13 +1263,22 @@
         .galeria-grid {
             max-width: 1200px;
             margin: 60px auto 0;
-            column-count: 4;
-            column-gap: 22px;
+            display: flex;
+            gap: 22px;
+        }
+
+        .galeria-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .galeria-col:nth-child(2) {
+            margin-top: 60px;
         }
 
         .galeria-item {
-            break-inside: avoid;
-            margin-bottom: 22px;
             border-radius: 6px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(59, 55, 30, 0.1);
@@ -1286,26 +1295,17 @@
             transform: scale(1.07);
         }
 
-        @media (max-width: 980px) {
-            .galeria-grid {
-                column-count: 3;
-            }
-        }
-
         @media (max-width: 700px) {
             .galeria-grid {
-                column-count: 2;
-                column-gap: 14px;
+                gap: 14px;
             }
 
-            .galeria-item {
-                margin-bottom: 14px;
+            .galeria-col {
+                gap: 14px;
             }
-        }
 
-        @media (max-width: 480px) {
-            .galeria-grid {
-                column-count: 1;
+            .galeria-col:nth-child(2) {
+                margin-top: 40px;
             }
         }
 
@@ -1898,11 +1898,21 @@
 
         const galeriaGrid = document.getElementById('galeriaGrid');
         if (galeriaGrid) {
-            galeriaGrid.innerHTML = fotosGaleria.map(src => `
-                <div class="galeria-item">
-                    <img src="${src}" alt="Marlon e Catia" loading="lazy">
-                </div>
-            `).join('');
+            const numColunas = 2;
+            const colunas = [];
+            for (let c = 0; c < numColunas; c++) {
+                const col = document.createElement('div');
+                col.className = 'galeria-col';
+                colunas.push(col);
+                galeriaGrid.appendChild(col);
+            }
+
+            fotosGaleria.forEach((src, i) => {
+                const item = document.createElement('div');
+                item.className = 'galeria-item';
+                item.innerHTML = `<img src="${src}" alt="Marlon e Catia" loading="lazy">`;
+                colunas[i % numColunas].appendChild(item);
+            });
 
             const galeriaLightbox = document.getElementById('galeriaLightbox');
             const galeriaLightboxImg = document.getElementById('galeriaLightboxImg');
