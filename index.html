@@ -153,6 +153,10 @@
             width: 100%;
         }
 
+        .menu-footer {
+            display: none;
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -1112,6 +1116,7 @@
             }
 
             .menu-footer {
+                display: block;
                 margin-top: 30px;
                 text-align: center;
                 opacity: 0;
@@ -1377,7 +1382,7 @@
             gap: 22px;
         }
 
-        .galeria-col:nth-child(2) {
+        .galeria-col:nth-child(even) {
             margin-top: 60px;
         }
 
@@ -1407,7 +1412,7 @@
                 gap: 14px;
             }
 
-            .galeria-col:nth-child(2) {
+            .galeria-col:nth-child(even) {
                 margin-top: 40px;
             }
         }
@@ -2065,20 +2070,40 @@
 
         const galeriaGrid = document.getElementById('galeriaGrid');
         if (galeriaGrid) {
-            const numColunas = 2;
-            const colunas = [];
-            for (let c = 0; c < numColunas; c++) {
-                const col = document.createElement('div');
-                col.className = 'galeria-col';
-                colunas.push(col);
-                galeriaGrid.appendChild(col);
+            function colunasParaLargura() {
+                return window.innerWidth >= 980 ? 4 : 2;
             }
 
-            fotosGaleria.forEach((src, i) => {
-                const item = document.createElement('div');
-                item.className = 'galeria-item';
-                item.innerHTML = `<img src="${src}" alt="Marlon e Catia" loading="lazy">`;
-                colunas[i % numColunas].appendChild(item);
+            let colunasAtuais = null;
+
+            function montarGaleria() {
+                const numColunas = colunasParaLargura();
+                if (numColunas === colunasAtuais) return;
+                colunasAtuais = numColunas;
+
+                galeriaGrid.innerHTML = '';
+                const colunas = [];
+                for (let c = 0; c < numColunas; c++) {
+                    const col = document.createElement('div');
+                    col.className = 'galeria-col';
+                    colunas.push(col);
+                    galeriaGrid.appendChild(col);
+                }
+
+                fotosGaleria.forEach((src, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'galeria-item';
+                    item.innerHTML = `<img src="${src}" alt="Marlon e Catia" loading="lazy">`;
+                    colunas[i % numColunas].appendChild(item);
+                });
+            }
+
+            montarGaleria();
+
+            let galeriaResizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(galeriaResizeTimeout);
+                galeriaResizeTimeout = setTimeout(montarGaleria, 150);
             });
 
             const galeriaLightbox = document.getElementById('galeriaLightbox');
@@ -2095,8 +2120,9 @@
                 galeriaLightboxImg.src = '';
             }
 
-            galeriaGrid.querySelectorAll('.galeria-item img').forEach(img => {
-                img.addEventListener('click', () => abrirLightbox(img.src, img.alt));
+            galeriaGrid.addEventListener('click', (e) => {
+                const img = e.target.closest('.galeria-item img');
+                if (img) abrirLightbox(img.src, img.alt);
             });
             galeriaLightboxClose.addEventListener('click', fecharLightbox);
             galeriaLightbox.addEventListener('click', (e) => {
