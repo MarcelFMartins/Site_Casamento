@@ -141,8 +141,39 @@
 
         .menu-toggle {
             display: none;
-            font-size: 2rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            width: 34px;
+            height: 28px;
+            background: none;
+            border: none;
+            padding: 0;
             cursor: pointer;
+            z-index: 1200;
+            position: relative;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
         header.scrolled {
@@ -1010,33 +1041,91 @@
                 color: black;
             }
 
-            nav ul {
-                position: absolute;
-                top: 84px;
-                left: 0;
-                width: 100%;
+            nav {
+                position: fixed;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
                 background: var(--creme);
+                z-index: 1100;
+                display: flex;
                 flex-direction: column;
                 align-items: center;
-                display: none;
-                padding: 10px 0;
+                justify-content: center;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-16px);
+                transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
             }
 
-            nav ul.active {
-                display: flex;
+            nav.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
             }
 
             nav li {
-                padding: 15px 0;
+                padding: 14px 0;
+                opacity: 0;
+                transform: translateY(14px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
             }
+
+            nav.active li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            nav.active li:nth-child(1) { transition-delay: 0.08s; }
+            nav.active li:nth-child(2) { transition-delay: 0.13s; }
+            nav.active li:nth-child(3) { transition-delay: 0.18s; }
+            nav.active li:nth-child(4) { transition-delay: 0.23s; }
+            nav.active li:nth-child(5) { transition-delay: 0.28s; }
+            nav.active li:nth-child(6) { transition-delay: 0.33s; }
+            nav.active li:nth-child(7) { transition-delay: 0.38s; }
+            nav.active li:nth-child(8) { transition-delay: 0.43s; }
 
             nav a {
                 color: var(--verde);
                 box-shadow: none;
+                font-size: 1.15rem;
+            }
+
+            .menu-footer {
+                margin-top: 30px;
+                text-align: center;
+                opacity: 0;
+                transform: translateY(14px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+                transition-delay: 0.48s;
+            }
+
+            nav.active .menu-footer {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .menu-footer-nome {
+                font-family: 'PinyonScript';
+                font-size: 2rem;
+                color: var(--verde);
+            }
+
+            .menu-footer-data {
+                margin-top: 4px;
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+                color: var(--dourado);
             }
 
             .menu-toggle {
-                display: block;
+                display: flex;
                 color: var(--verde);
             }
 
@@ -1370,7 +1459,12 @@
 <body>
 
     <header>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Abrir menu"
+            aria-expanded="false" aria-controls="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <nav>
             <ul id="menu">
                 <li><a href="#inicio">Inicio</a></li>
@@ -1382,6 +1476,10 @@
                 <li><a href="#muralrec">Mural de Recados</a></li>
                 <li><a href="#galeria">Galeria</a></li>
             </ul>
+            <div class="menu-footer">
+                <p class="menu-footer-nome">Marlon e Cátia</p>
+                <p class="menu-footer-data">31/10/2026</p>
+            </div>
         </nav>
     </header>
 
@@ -1774,8 +1872,21 @@
 
     <script>
         function toggleMenu() {
-            document.getElementById("menu").classList.toggle("active");
+            const nav = document.querySelector("header nav");
+            const btn = document.getElementById("menuToggle");
+            const aberto = nav.classList.toggle("active");
+            btn.classList.toggle("active", aberto);
+            btn.setAttribute("aria-expanded", String(aberto));
+            btn.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+            document.body.style.overflow = aberto ? "hidden" : "";
         }
+
+        document.querySelectorAll("nav a").forEach(link => {
+            link.addEventListener("click", () => {
+                const nav = document.querySelector("header nav");
+                if (nav.classList.contains("active")) toggleMenu();
+            });
+        });
 
         // ================== CARROSSEL DO HERO ==================
         (function () {
