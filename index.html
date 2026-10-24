@@ -1885,9 +1885,8 @@
         <img id="galeriaLightboxImg" src="" alt="">
     </div>
 
-    <!-- Supabase JS SDK (mural de recados) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
+    <!-- Firebase (mural de recados) -->
+    <script type="module" src="firebase-config.js"></script>
 
     <script>
         function toggleMenu() {
@@ -2133,7 +2132,7 @@
             });
         }
 
-        // ================== MURAL DE RECADOS (Supabase) ==================
+        // ================== MURAL DE RECADOS (Firebase) ==================
 
         function formatarData(isoString) {
             const data = new Date(isoString);
@@ -2144,21 +2143,20 @@
             });
         }
 
+        function esc(t) {
+            const d = document.createElement('div');
+            d.textContent = t;
+            return d.innerHTML;
+        }
+
         async function carregarRecados() {
             const mural = document.getElementById('mural-recados');
             if (!mural) return;
 
-            if (!window.supabaseClient) {
-                mural.innerHTML = '<p class="mural-vazio">Mural em configuração — em breve os recados aparecerão aqui.</p>';
-                return;
-            }
-
-            const { data, error } = await window.supabaseClient
-                .from('recados')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) {
+            let data;
+            try {
+                data = await window.recadosDB.listar();
+            } catch (error) {
                 console.error('Erro ao carregar recados:', error);
                 mural.innerHTML = '<p class="mural-vazio">Não foi possível carregar os recados no momento.</p>';
                 return;
@@ -2175,11 +2173,11 @@
                 const recadoHTML = `
                     <div class="recado-card">
                         <div class="recado-header">
-                            <h4>${recado.nome}</h4>
+                            <h4>${esc(recado.nome)}</h4>
                             <small>${formatarData(recado.created_at)}</small>
                         </div>
                         <div class="recado-texto">
-                            "${recado.mensagem}"
+                            "${esc(recado.mensagem)}"
                         </div>
                     </div>
                 `;
@@ -2192,17 +2190,15 @@
             formRecado.addEventListener('submit', async function (e) {
                 e.preventDefault();
 
-                if (!window.supabaseClient) {
-                    alert('Mural indisponível no momento. Tente novamente mais tarde.');
-                    return;
-                }
-
                 const nome = document.getElementById('nome').value.trim();
                 const mensagem = document.getElementById('mensagem').value.trim();
 
-                const { error } = await window.supabaseClient
-                    .from('recados')
-                    .insert([{ nome, mensagem }]);
+                let error = null;
+                try {
+                    await window.recadosDB.criar(nome, mensagem);
+                } catch (e) {
+                    error = e;
+                }
 
                 if (!error) {
                     alert('Recado enviado com sucesso! Muito obrigado!');
