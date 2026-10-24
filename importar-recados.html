@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Importar recados (uso único)</title>
+<button id="b">Importar recados do backup</button>
+<pre id="o"></pre>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+import { getFirestore, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
+const db = getFirestore(initializeApp({ apiKey: "AIzaSyDS1Mj6-7XW585mvhE7Q60ct8zgd7nsskc", projectId: "marlonecatia-241c8" }));
+const recados = [
+  {"id": "recado-3", "nome": "Monica Vogel", "mensagem": "Que Deus abençoe essa união meus filhos, que vocês sejam um exemplo de respeito, carinho, amor e paciência. Vocês já construíram uma família linda, e estou muito feliz em ver essa União ser oficializada e abençoada. Desejo toda a felicidade do mundo a vocês dois. Contem comigo sempre, estarei sempre orando por vocês", "data": "2026-04-16T12:00:00Z"},
+  {"id": "recado-4", "nome": "Mirella Dalmolin", "mensagem": "Já tô com a roupa de ir... Que Deus abençoe a união de vocês! <3", "data": "2026-04-10T12:00:00Z"},
+  {"id": "recado-5", "nome": "Mariza Terezinha Steffani de Oliveira", "mensagem": "Meus sobrinhos queridos, me sinto muito honrada, em poder fazer parte este momento, tão especial na vida de vocês, pois o casamento é a aliança que vocês firmaram, não somente na presença da família e amigos, mas na presença de Deus.", "data": "2026-03-29T12:00:00Z"},
+];
+document.getElementById('b').onclick = async () => {
+  for (const r of recados) {
+    try {
+      await setDoc(doc(db, 'recados', r.id), { nome: r.nome, mensagem: r.mensagem, created_at: Timestamp.fromDate(new Date(r.data)) });
+      o.textContent += 'OK ' + r.id + '\n';
+    } catch (e) { o.textContent += 'ERRO ' + r.id + ': ' + e.message + '\n'; }
+  }
+};
+</script>

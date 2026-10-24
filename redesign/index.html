@@ -1145,8 +1145,7 @@
         <img id="lightboxImg" src="" alt="">
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../supabase-config.js"></script>
+    <script type="module" src="../firebase-config.js"></script>
 
     <script>
         // ===== Topbar scroll state =====
@@ -1313,43 +1312,55 @@
         lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-        // ===== Mural (Supabase) =====
+        // ===== Mural (Firebase) =====
         function formatarData(iso) {
             return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         }
+        function esc(t) {
+            const d = document.createElement('div');
+            d.textContent = t;
+            return d.innerHTML;
+        }
         async function carregarMural() {
             const grid = document.getElementById('muralGrid');
-            if (!window.supabaseClient) {
-                grid.innerHTML = '<p class="mural-empty">Mural em configuração — em breve os recados aparecerão aqui.</p>';
+            let data;
+            try {
+                data = await window.recadosDB.listar();
+            } catch (error) {
+                console.error('Erro ao carregar recados:', error);
+                grid.innerHTML = '<p class="mural-empty">Não foi possível carregar os recados no momento.</p>';
                 return;
             }
-            const { data, error } = await window.supabaseClient.from('recados').select('*').order('created_at', { ascending: false });
-            if (error || !data || data.length === 0) {
+            if (!data || data.length === 0) {
                 grid.innerHTML = '<p class="mural-empty">Seja o primeiro a deixar um recado para os noivos!</p>';
                 return;
             }
             grid.innerHTML = data.map(r => `
                 <div class="mural-card">
-                    <h4>${r.nome}</h4>
+                    <h4>${esc(r.nome)}</h4>
                     <small>${formatarData(r.created_at)}</small>
-                    <p>"${r.mensagem}"</p>
+                    <p>"${esc(r.mensagem)}"</p>
                 </div>
             `).join('');
         }
-        carregarMural();
+        window.addEventListener('load', carregarMural);
 
         document.getElementById('muralForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!window.supabaseClient) return;
             const nome = document.getElementById('muralNome').value.trim();
             const mensagem = document.getElementById('muralMensagem').value.trim();
-            const { error } = await window.supabaseClient.from('recados').insert([{ nome, mensagem }]);
+            let error = null;
+            try {
+                await window.recadosDB.criar(nome, mensagem);
+            } catch (e) {
+                error = e;
+            }
             if (!error) {
                 document.getElementById('muralForm').reset();
                 const s = document.getElementById('muralSuccess');
                 s.classList.add('show');
                 setTimeout(() => s.classList.remove('show'), 3500);
-                carregarMural();
+                window.addEventListener('load', carregarMural);
             }
         });
     </script>
