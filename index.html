@@ -1696,9 +1696,24 @@
             position: relative;
             max-width: 640px;
             max-height: 100%;
+            overflow-x: hidden;
             overflow-y: auto;
+            scrollbar-width: none;
             text-align: center;
             color: #f5f3ec;
+        }
+
+        .celebracao-conteudo::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-height: 700px) {
+            #celebracaoOverlay { padding: 12px 16px; }
+            .aliancas { width: 90px; height: 60px; }
+            .celebracao-conteudo h1 { font-size: 4.2rem; }
+            .celebracao-conteudo h2 { font-size: 1.6rem; }
+            .celebracao-conteudo p { margin-top: 14px; font-size: 1rem; line-height: 1.7; }
+            .celebracao-conteudo button { margin-top: 18px; }
         }
 
         .celebracao-conteudo > * {
