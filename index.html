@@ -1472,6 +1472,680 @@
                 right: max(12px, env(safe-area-inset-right));
             }
         }
+        /* ================== SURPRESAS: VÉSPERA E CELEBRAÇÃO ================== */
+
+        #efeitosCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2600;
+        }
+
+        #heroSelo {
+            display: inline-block;
+            padding: 8px 22px;
+            border: 1px solid rgba(217, 195, 145, 0.7);
+            border-radius: 40px;
+            background: rgba(20, 22, 10, 0.25);
+            animation: seloBrilho 2.6s ease-in-out infinite;
+        }
+
+        #heroSelo[hidden] {
+            display: none;
+        }
+
+        @keyframes seloBrilho {
+            0%, 100% { box-shadow: 0 0 0 rgba(217, 195, 145, 0); }
+            50% { box-shadow: 0 0 24px rgba(217, 195, 145, 0.55); }
+        }
+
+        .contagem-nota {
+            display: none;
+            text-align: center;
+            margin-top: 26px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            color: var(--dourado);
+        }
+
+        .contagem-nota .coracao {
+            display: inline-block;
+            color: #b5545c;
+            animation: batida 1.2s ease-in-out infinite;
+        }
+
+        .fase-vespera .contagem-nota,
+        .fase-casados .contagem-nota {
+            display: block;
+        }
+
+        .fase-vespera .tempo-dias {
+            display: none;
+        }
+
+        .fase-vespera #countdown,
+        .fase-casados #countdown {
+            padding: 28px 36px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid var(--dourado-claro);
+            border-radius: 6px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(241, 236, 225, 0.6));
+            animation: contagemPulso 2.4s ease-in-out infinite;
+        }
+
+        .fase-vespera .digit-tracker span,
+        .fase-casados .digit-tracker span {
+            color: var(--dourado);
+        }
+
+        @keyframes contagemPulso {
+            0%, 100% { box-shadow: 0 0 0 rgba(176, 141, 79, 0); }
+            50% { box-shadow: 0 0 34px rgba(176, 141, 79, 0.35); }
+        }
+
+        @keyframes batida {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.25); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.18); }
+        }
+
+        /* ---------- Overlays (véspera, 10 segundos finais e celebração) ---------- */
+
+        .surpresa-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.9s ease, visibility 0.9s ease;
+        }
+
+        .surpresa-overlay.aberto {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Véspera */
+        #vesperaOverlay {
+            background: rgba(51, 60, 21, 0.55);
+            backdrop-filter: blur(4px);
+        }
+
+        .vespera-card {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            padding: 52px 34px 40px;
+            text-align: center;
+            background: var(--creme);
+            border-radius: 6px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            transform: translateY(30px) scale(0.96);
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .vespera-card::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid var(--dourado-claro);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        #vesperaOverlay.aberto .vespera-card {
+            transform: none;
+        }
+
+        .vespera-card h1 {
+            font-family: 'PinyonScript';
+            font-weight: normal;
+            font-size: 4rem;
+            color: var(--verde);
+            line-height: 1.1;
+        }
+
+        .vespera-card p {
+            margin: 18px auto 0;
+            max-width: 360px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--texto);
+        }
+
+        .vespera-card .vespera-hora {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--dourado);
+        }
+
+        .vespera-card button,
+        .celebracao-conteudo button {
+            position: relative;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+
+        /* 10 segundos finais */
+        #finalOverlay {
+            background: radial-gradient(circle at center, rgba(51, 60, 21, 0.92), rgba(20, 22, 10, 0.97));
+            flex-direction: column;
+            color: var(--creme);
+        }
+
+        #finalOverlay .eyebrow {
+            color: var(--dourado-claro);
+        }
+
+        #finalNumero {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 11rem;
+            line-height: 1;
+            color: var(--dourado-claro);
+            text-shadow: 0 0 40px rgba(217, 195, 145, 0.45);
+        }
+
+        #finalNumero.tick {
+            animation: numeroTick 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes numeroTick {
+            0% { transform: scale(1.6); opacity: 0; }
+            25% { opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Celebração */
+        #celebracaoOverlay {
+            overflow: hidden;
+            background: var(--verde-escuro);
+        }
+
+        .celebracao-foto {
+            position: absolute;
+            inset: -4%;
+            background: url('img/casal-beijomao.jpg') center 30% / cover no-repeat;
+            animation: kenBurns 22s ease-in-out infinite alternate;
+        }
+
+        .celebracao-foto::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(20, 22, 10, 0.55), rgba(20, 22, 10, 0.88));
+        }
+
+        @keyframes kenBurns {
+            from { transform: scale(1); }
+            to { transform: scale(1.12) translateY(-1.5%); }
+        }
+
+        .celebracao-conteudo {
+            position: relative;
+            max-width: 640px;
+            max-height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-width: none;
+            text-align: center;
+            color: #f5f3ec;
+        }
+
+        .celebracao-conteudo::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-height: 700px) {
+            #celebracaoOverlay { padding: 12px 16px; }
+            .aliancas { width: 90px; height: 60px; }
+            .celebracao-conteudo h1 { font-size: 4.2rem; }
+            .celebracao-conteudo h2 { font-size: 1.6rem; }
+            .celebracao-conteudo p { margin-top: 14px; font-size: 1rem; line-height: 1.7; }
+            .celebracao-conteudo button { margin-top: 18px; }
+        }
+
+        .celebracao-conteudo > * {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        #celebracaoOverlay.aberto .celebracao-conteudo > * {
+            animation: surgir 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        #celebracaoOverlay.aberto .celebracao-conteudo > :nth-child(1) { animation-delay: 0.3s; }
+        #celebracaoOverlay.aberto .celebracao-conteudo > :nth-child(2) { animation-delay: 1.6s; }
+        #celebracaoOverlay.aberto .celebracao-conteudo > :nth-child(3) { animation-delay: 2.1s; }
+        #celebracaoOverlay.aberto .celebracao-conteudo > :nth-child(4) { animation-delay: 2.8s; }
+        #celebracaoOverlay.aberto .celebracao-conteudo > :nth-child(5) { animation-delay: 3.5s; }
+        #celebracaoOverlay.aberto .celebracao-conteudo > :nth-child(6) { animation-delay: 4.3s; }
+        #celebracaoOverlay.aberto .celebracao-conteudo > :nth-child(7) { animation-delay: 5s; }
+
+        @keyframes surgir {
+            to { opacity: 1; transform: none; }
+        }
+
+        .aliancas {
+            width: 120px;
+            height: 80px;
+            margin: 0 auto 6px;
+            display: block;
+        }
+
+        .aliancas circle {
+            fill: none;
+            stroke: var(--dourado-claro);
+            stroke-width: 3;
+            stroke-dasharray: 190;
+            stroke-dashoffset: 190;
+            filter: drop-shadow(0 0 6px rgba(217, 195, 145, 0.6));
+        }
+
+        #celebracaoOverlay.aberto .aliancas circle {
+            animation: desenharAlianca 2s ease-in-out forwards;
+        }
+
+        #celebracaoOverlay.aberto .aliancas circle + circle {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes desenharAlianca {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .celebracao-conteudo .eyebrow {
+            color: var(--dourado-claro);
+            margin-bottom: 4px;
+        }
+
+        .celebracao-conteudo h1 {
+            font-family: 'PinyonScript';
+            font-weight: normal;
+            font-size: 6rem;
+            line-height: 1.1;
+            color: #fff;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .celebracao-conteudo h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 2rem;
+            color: var(--dourado-claro);
+            margin-top: 4px;
+        }
+
+        .celebracao-conteudo p {
+            margin: 22px auto 0;
+            max-width: 520px;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: rgba(245, 243, 236, 0.92);
+        }
+
+        .celebracao-conteudo .celebracao-viva {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: var(--dourado-claro);
+        }
+
+        .celebracao-conteudo button {
+            background: transparent;
+            border: 1px solid var(--dourado-claro);
+            color: var(--dourado-claro);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .celebracao-conteudo button:hover {
+            background: var(--dourado-claro);
+            color: var(--verde-escuro);
+        }
+
+        @media (max-width: 600px) {
+            .vespera-card h1 { font-size: 3.2rem; }
+            .celebracao-conteudo h1 { font-size: 4rem; }
+            .celebracao-conteudo h2 { font-size: 1.6rem; }
+            .celebracao-conteudo p { font-size: 1rem; }
+            #finalNumero { font-size: 8rem; }
+            .fase-vespera #countdown,
+            .fase-casados #countdown { padding: 20px 16px; }
+            .contagem-nota { font-size: 1.15rem; padding: 0 16px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .celebracao-foto,
+            #heroSelo,
+            .contagem-nota .coracao,
+            .fase-vespera #countdown,
+            .fase-casados #countdown { animation: none; }
+        }
+        /* ================== MODO NOIVOS (a partir de 24h antes) ================== */
+
+        .modo-noivos {
+            --ouro-escuro: #8c6a2c;
+            --ouro-grad: linear-gradient(110deg, #8c6a2c 0%, #c9a45c 20%, #f3e2b0 40%, #c9a45c 58%, #8c6a2c 78%, #c9a45c 100%);
+            background: #fbf7ee;
+        }
+
+        .modo-noivos #locais,
+        .modo-noivos #ondeficar,
+        .modo-noivos #beleza,
+        .modo-noivos .bloco-contato,
+        .modo-noivos .divisor {
+            display: none;
+        }
+
+        @keyframes brilhoOuro {
+            from { background-position: 0% 50%; }
+            to { background-position: 200% 50%; }
+        }
+
+        .modo-noivos .titulo-secao,
+        .modo-noivos #galeria h1,
+        .modo-noivos #presentes h1,
+        .modo-noivos .footer-logo {
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 0.25em;
+            background: var(--ouro-grad);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: brilhoOuro 6s linear infinite;
+        }
+
+        .modo-noivos .eyebrow {
+            color: var(--ouro-escuro);
+        }
+
+        .modo-noivos .ornament::before,
+        .modo-noivos .ornament::after {
+            width: 70px;
+            background: linear-gradient(to right, transparent, #c9a45c);
+        }
+
+        .modo-noivos .ornament::after {
+            background: linear-gradient(to left, transparent, #c9a45c);
+        }
+
+        .modo-noivos .ornament span {
+            color: #c9a45c;
+        }
+
+        /* Header */
+        .modo-noivos header.scrolled {
+            background: rgba(251, 247, 238, 0.96);
+            box-shadow: 0 1px 0 rgba(176, 141, 79, 0.35), 0 6px 24px rgba(140, 106, 44, 0.08);
+        }
+
+        .modo-noivos header.scrolled nav a {
+            color: var(--ouro-escuro) !important;
+        }
+
+        .modo-noivos header.scrolled .menu-toggle {
+            color: var(--ouro-escuro);
+        }
+
+        /* Hero */
+        .modo-noivos .hero-overlay {
+            background:
+                radial-gradient(ellipse at center, rgba(40, 32, 10, 0.25), rgba(20, 16, 4, 0.7)),
+                linear-gradient(rgba(60, 45, 10, 0.15), rgba(20, 16, 4, 0.35));
+        }
+
+        .modo-noivos #inicio h1 {
+            background: linear-gradient(110deg, #d9b56a 0%, #f3e2b0 22%, #fff8e4 40%, #e9cf8f 58%, #d9b56a 78%, #f3e2b0 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.5));
+            animation: brilhoOuro 6s linear infinite;
+            padding: 0 0.2em;
+        }
+
+        .modo-noivos #inicio .container > p {
+            color: #f3e2b0;
+        }
+
+        .modo-noivos #inicio .hero-ornament {
+            display: none;
+        }
+
+        .hero-contagem {
+            margin-top: 34px;
+        }
+
+        .hero-contagem h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: #f3e2b0;
+            margin-bottom: 14px;
+        }
+
+        #inicio .hero-contagem #countdown {
+            margin-top: 0;
+            padding: 22px 34px;
+            background: rgba(20, 16, 4, 0.38);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(217, 195, 145, 0.6);
+            border-radius: 6px;
+        }
+
+        #inicio .digit-tracker span {
+            color: #f3e2b0;
+            text-shadow: 0 0 18px rgba(217, 195, 145, 0.45);
+        }
+
+        #inicio .tempo small {
+            color: var(--dourado-claro);
+        }
+
+        #inicio .contagem-nota {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            color: #f3e2b0;
+            margin-top: 18px;
+        }
+
+        /* Recados */
+        .modo-noivos #contato-e-recados {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(217, 195, 145, 0.28), transparent 60%),
+                #fbf7ee;
+            padding-top: 130px;
+        }
+
+        .modo-noivos .form-container {
+            position: relative;
+            margin-bottom: 70px;
+            padding: 56px 42px 48px;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 24px 60px rgba(140, 106, 44, 0.12);
+        }
+
+        .modo-noivos .form-container::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(201, 164, 92, 0.55);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .modo-noivos .form-mensagem {
+            position: relative;
+        }
+
+        .modo-noivos .form-mensagem input,
+        .modo-noivos .form-mensagem textarea {
+            border-color: rgba(201, 164, 92, 0.45);
+            background: #fffdf8;
+        }
+
+        .modo-noivos .form-mensagem input:focus,
+        .modo-noivos .form-mensagem textarea:focus {
+            border-color: #c9a45c;
+            box-shadow: 0 0 0 3px rgba(217, 195, 145, 0.3);
+        }
+
+        .modo-noivos .btn-enviar {
+            background: linear-gradient(110deg, #a8823f, #d9c391 50%, #a8823f);
+            background-size: 200% auto;
+            color: var(--verde-escuro);
+            font-weight: 600;
+            transition: background-position 0.6s ease, box-shadow 0.3s ease;
+        }
+
+        .modo-noivos .btn-enviar:hover {
+            background-position: 100% 0;
+            box-shadow: 0 8px 24px rgba(140, 106, 44, 0.3);
+        }
+
+        .modo-noivos .recado-card {
+            position: relative;
+            border-color: rgba(201, 164, 92, 0.35);
+            box-shadow: inset 0 3px 0 #c9a45c, 0 10px 30px rgba(140, 106, 44, 0.08);
+        }
+
+        .modo-noivos .recado-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 6px;
+            right: 22px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            line-height: 1;
+            color: rgba(201, 164, 92, 0.35);
+        }
+
+        .modo-noivos .recado-header {
+            padding-right: 40px;
+            border-bottom-color: rgba(201, 164, 92, 0.25);
+        }
+
+        .modo-noivos .recado-header h4 {
+            color: var(--ouro-escuro);
+        }
+
+        /* Galeria */
+        .modo-noivos #galeria {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(217, 195, 145, 0.3), transparent 55%),
+                #f5eedd;
+            border-top: 1px solid rgba(176, 141, 79, 0.3);
+        }
+
+        .modo-noivos .galeria-item {
+            padding: 7px;
+            background: #fff;
+            border: 1px solid rgba(201, 164, 92, 0.5);
+            box-shadow: 0 14px 34px rgba(140, 106, 44, 0.14);
+        }
+
+        .modo-noivos .galeria-item img {
+            border-radius: 3px;
+        }
+
+        /* Presentes */
+        .modo-noivos #presentes {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(201, 164, 92, 0.25), transparent 60%),
+                linear-gradient(#333c15, #20250b);
+            border-top: 1px solid rgba(217, 195, 145, 0.45);
+        }
+
+        .modo-noivos #presentes .eyebrow {
+            color: var(--dourado-claro);
+        }
+
+        .modo-noivos .card-presente {
+            border: 1px solid rgba(217, 195, 145, 0.6);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .modo-noivos .card-overlay h2 {
+            color: #f3e2b0;
+        }
+
+        .modo-noivos .btn-presente {
+            border-color: #c9a45c;
+            color: #f3e2b0;
+        }
+
+        /* Footer */
+        .modo-noivos .main-footer {
+            background: #1a1e08;
+            border-top: 1px solid rgba(217, 195, 145, 0.35);
+        }
+
+        @media (max-width: 768px) {
+            .modo-noivos header,
+            .modo-noivos nav {
+                background: #fbf7ee;
+            }
+
+            .modo-noivos nav a {
+                color: var(--ouro-escuro);
+            }
+
+            .modo-noivos .menu-toggle {
+                color: var(--ouro-escuro);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-contagem {
+                margin-top: 24px;
+            }
+
+            .hero-contagem h2 {
+                font-size: 1.25rem;
+            }
+
+            #inicio .hero-contagem #countdown {
+                padding: 16px 18px;
+            }
+
+            #inicio .contagem-nota {
+                font-size: 1.1rem;
+            }
+
+            .modo-noivos .form-container {
+                padding: 46px 24px 36px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .modo-noivos .titulo-secao,
+            .modo-noivos #galeria h1,
+            .modo-noivos #presentes h1,
+            .modo-noivos .footer-logo,
+            .modo-noivos #inicio h1 { animation: none; }
+        }
     </style>
 </head>
 
@@ -1514,6 +2188,7 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
+            <span class="hero-eyebrow" id="heroSelo" hidden></span>
             <h1>Marlon e Catia</h1>
             <p>31 · 10 · 2026</p>
             <div class="hero-ornament"></div>
@@ -1529,11 +2204,11 @@
                     família e amigos um dos dias mais especiais das nossas vidas! Queremos muito sua presença neste
                     dia tão importante, com muita festa, amor e carinho em uma comemoração que irá marcar nossas
                     vidas para sempre!</p>
-                <h2>Faltam</h2>
+                <h2 id="contagemTitulo">Faltam</h2>
             </div>
 
             <div id="countdown">
-                <div class="tempo">
+                <div class="tempo tempo-dias">
                     <div id="dias-digits" class="digit-group"></div>
                     <small>Dias</small>
                 </div>
@@ -1550,6 +2225,7 @@
                     <small>Segundos</small>
                 </div>
             </div>
+            <p class="contagem-nota" id="contagemNota"></p>
 
             <div class="flex-locais">
 
@@ -1880,6 +2556,43 @@
         <p class="footer-data">31 de Outubro de 2026 • Todos os Direitos Reservados ©</p>
     </footer>
 
+    <!-- ================== SURPRESAS: VÉSPERA E CELEBRAÇÃO ================== -->
+    <canvas id="efeitosCanvas" aria-hidden="true"></canvas>
+
+    <div class="surpresa-overlay" id="vesperaOverlay" role="dialog" aria-modal="true" aria-labelledby="vesperaTitulo">
+        <div class="vespera-card">
+            <span class="eyebrow">Contagem final</span>
+            <h1 id="vesperaTitulo">É amanhã!</h1>
+            <div class="ornament"><span>✦</span></div>
+            <p id="vesperaTexto">Falta menos de um dia para Marlon e Catia dizerem <em>sim</em>. Prepare o coração (e o lencinho!) — o grande dia chegou.</p>
+            <p class="vespera-hora">Catedral Sagrado Coração de Jesus · 16h30</p>
+            <button type="button" id="vesperaFechar">Mal posso esperar ♥</button>
+        </div>
+    </div>
+
+    <div class="surpresa-overlay" id="finalOverlay" aria-live="assertive">
+        <span class="eyebrow">Está chegando a hora</span>
+        <div id="finalNumero">10</div>
+    </div>
+
+    <div class="surpresa-overlay" id="celebracaoOverlay" role="dialog" aria-modal="true" aria-labelledby="celebracaoTitulo">
+        <div class="celebracao-foto"></div>
+        <div class="celebracao-conteudo">
+            <svg class="aliancas" viewBox="0 0 120 80" aria-hidden="true">
+                <circle cx="45" cy="42" r="28" />
+                <circle cx="75" cy="42" r="28" />
+            </svg>
+            <span class="eyebrow">31 · 10 · 2026</span>
+            <h1 id="celebracaoTitulo">Marlon &amp; Catia</h1>
+            <h2>Felizes para sempre</h2>
+            <p>Hoje o amor de vocês ganhou um novo nome: família. Que essa nova jornada seja leve, cheia de
+                cumplicidade, risadas, abraços demorados e muitos sonhos realizados lado a lado. Que cada dia
+                juntos seja tão bonito quanto este.</p>
+            <p class="celebracao-viva">Vivam os noivos! ♥</p>
+            <button type="button" id="celebracaoFechar">Entrar e celebrar</button>
+        </div>
+    </div>
+
     <div class="galeria-lightbox" id="galeriaLightbox">
         <button class="galeria-lightbox-close" id="galeriaLightboxClose" aria-label="Fechar imagem">&times;</button>
         <img id="galeriaLightboxImg" src="" alt="">
@@ -2012,9 +2725,354 @@
             }
         }
 
+        // ================== SURPRESAS: VÉSPERA E CELEBRAÇÃO ==================
+        // Teste: ?simular=N finge que faltam N segundos para a cerimônia
+        // (ex.: ?simular=86415 → entra na véspera em 15s; ?simular=15 → celebração em 15s;
+        //  ?simular=-3600 → casados há 1 hora).
+
+        const UM_DIA = 1000 * 60 * 60 * 24;
+        const parametroSimular = new URLSearchParams(location.search).get('simular');
+        const modoTeste = parametroSimular !== null && !isNaN(parseFloat(parametroSimular));
+        const deslocamentoTempo = modoTeste
+            ? (dataCasamento - parseFloat(parametroSimular) * 1000) - Date.now()
+            : 0;
+
+        function agoraMs() {
+            return Date.now() + deslocamentoTempo;
+        }
+
+        const reduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function jaMostrado(chave) {
+            if (modoTeste) return false;
+            try { return sessionStorage.getItem(chave) === '1'; } catch (e) { return false; }
+        }
+
+        function marcarMostrado(chave) {
+            try { sessionStorage.setItem(chave, '1'); } catch (e) { }
+        }
+
+        // ---------- Partículas (pétalas, corações e confetes) ----------
+        const efeitos = (function () {
+            const canvas = document.getElementById('efeitosCanvas');
+            const ctx = canvas.getContext('2d');
+            const cores = {
+                petala: ['#f4d7d4', '#ecc3c0', '#f8e6e1', '#e7b7b4', '#fff4ef'],
+                confete: ['#b08d4f', '#d9c391', '#f1ece1', '#4b5321', '#e9d9b0', '#ffffff'],
+                coracao: ['#c9706f', '#d98c8a', '#e6b0ad', '#d9c391']
+            };
+            let particulas = [];
+            let chuva = null;           // { tipos, porSegundo, ate }
+            let acumulado = 0;
+            let ultimoQuadro = 0;
+            let rodando = false;
+            let dpr = 1;
+
+            function redimensionar() {
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = innerWidth * dpr;
+                canvas.height = innerHeight * dpr;
+            }
+            redimensionar();
+            window.addEventListener('resize', redimensionar);
+
+            function sortear(lista) {
+                return lista[Math.floor(Math.random() * lista.length)];
+            }
+
+            function criar(tipo, x, y, vx, vy) {
+                const escala = innerWidth < 600 ? 0.8 : 1;
+                particulas.push({
+                    tipo,
+                    x, y, vx, vy,
+                    cor: sortear(cores[tipo]),
+                    tam: (tipo === 'confete' ? 5 + Math.random() * 5 : tipo === 'coracao' ? 9 + Math.random() * 9 : 8 + Math.random() * 8) * escala,
+                    rot: Math.random() * Math.PI * 2,
+                    vrot: (Math.random() - 0.5) * 0.12,
+                    balanco: Math.random() * Math.PI * 2,
+                    vida: 0
+                });
+            }
+
+            function caindo(tipo) {
+                const vy = tipo === 'confete' ? 1.6 + Math.random() * 1.6 : 0.7 + Math.random() * 1.1;
+                criar(tipo, Math.random() * innerWidth, -20, (Math.random() - 0.5) * 0.6, vy);
+            }
+
+            function desenhar(p) {
+                ctx.save();
+                ctx.translate(p.x * dpr, p.y * dpr);
+                ctx.rotate(p.rot);
+                ctx.scale(dpr, dpr);
+                ctx.fillStyle = p.cor;
+                if (p.tipo === 'confete') {
+                    ctx.scale(1, Math.cos(p.balanco * 2));
+                    ctx.fillRect(-p.tam / 2, -p.tam / 4, p.tam, p.tam / 2);
+                } else if (p.tipo === 'coracao') {
+                    const s = p.tam / 16;
+                    ctx.scale(s, s);
+                    ctx.beginPath();
+                    ctx.moveTo(0, 5);
+                    ctx.bezierCurveTo(-8, -2, -6, -10, 0, -5);
+                    ctx.bezierCurveTo(6, -10, 8, -2, 0, 5);
+                    ctx.fill();
+                } else {
+                    ctx.globalAlpha = 0.9;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.tam / 2, p.tam / 3.4, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function quadro(t) {
+                const dt = Math.min(50, t - (ultimoQuadro || t)) / 16.67;
+                ultimoQuadro = t;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (chuva && (!chuva.ate || t < chuva.ate)) {
+                    acumulado += chuva.porSegundo * dt / 60;
+                    while (acumulado >= 1) {
+                        caindo(sortear(chuva.tipos));
+                        acumulado--;
+                    }
+                } else if (chuva) {
+                    chuva = null;
+                }
+
+                particulas = particulas.filter(p => p.y < innerHeight + 40 && p.x > -60 && p.x < innerWidth + 60);
+                for (const p of particulas) {
+                    p.vida += dt;
+                    p.balanco += 0.04 * dt;
+                    p.vy = Math.min(p.vy + 0.035 * dt, p.tipo === 'confete' ? 3.4 : 1.9);
+                    p.vx *= Math.pow(0.985, dt);
+                    p.x += (p.vx + Math.sin(p.balanco) * 0.6) * dt;
+                    p.y += p.vy * dt;
+                    p.rot += p.vrot * dt;
+                    desenhar(p);
+                }
+
+                if (particulas.length || chuva) {
+                    requestAnimationFrame(quadro);
+                } else {
+                    rodando = false;
+                    ultimoQuadro = 0;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            function iniciar() {
+                if (rodando) return;
+                rodando = true;
+                requestAnimationFrame(quadro);
+            }
+
+            return {
+                chover(tipos, porSegundo, duracaoMs) {
+                    if (reduzirMovimento) return;
+                    chuva = { tipos, porSegundo, ate: duracaoMs ? performance.now() + duracaoMs : 0 };
+                    iniciar();
+                },
+                explosao(x, y, quantidade) {
+                    if (reduzirMovimento) return;
+                    for (let i = 0; i < quantidade; i++) {
+                        const ang = Math.random() * Math.PI * 2;
+                        const vel = 3 + Math.random() * 9;
+                        criar(Math.random() < 0.75 ? 'confete' : 'coracao', x, y,
+                            Math.cos(ang) * vel, Math.sin(ang) * vel - 5);
+                    }
+                    iniciar();
+                },
+                parar() {
+                    chuva = null;
+                }
+            };
+        })();
+
+        // ---------- Fases: normal → véspera (24h) → casados ----------
+        const vesperaOverlay = document.getElementById('vesperaOverlay');
+        const finalOverlay = document.getElementById('finalOverlay');
+        const finalNumero = document.getElementById('finalNumero');
+        const celebracaoOverlay = document.getElementById('celebracaoOverlay');
+        const heroSelo = document.getElementById('heroSelo');
+        const contagemTitulo = document.getElementById('contagemTitulo');
+        const contagemNota = document.getElementById('contagemNota');
+
+        let faseAtual = null;
+        let ultimoSegundoFinal = null;
+
+        function mesmoDia(a, b) {
+            const da = new Date(a), db = new Date(b);
+            return da.getFullYear() === db.getFullYear() && da.getMonth() === db.getMonth() && da.getDate() === db.getDate();
+        }
+
+        function abrirOverlay(el) {
+            el.classList.add('aberto');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharOverlay(el) {
+            el.classList.remove('aberto');
+            if (!document.querySelector('.surpresa-overlay.aberto')) document.body.style.overflow = '';
+        }
+
+        let vesperaEhHoje = null;
+
+        function textosVespera() {
+            const hoje = mesmoDia(agoraMs(), dataCasamento);
+            if (hoje === vesperaEhHoje) return;
+            vesperaEhHoje = hoje;
+            heroSelo.textContent = hoje ? 'É hoje!' : 'É amanhã!';
+            document.getElementById('vesperaTitulo').textContent = hoje ? 'É hoje!' : 'É amanhã!';
+            document.getElementById('vesperaTexto').innerHTML = hoje
+                ? 'Chegou o dia! Em poucas horas Marlon e Catia vão dizer <em>sim</em>. Prepare o coração (e o lencinho!) — nos vemos lá.'
+                : 'Falta menos de um dia para Marlon e Catia dizerem <em>sim</em>. Prepare o coração (e o lencinho!) — o grande dia chegou.';
+            contagemNota.innerHTML = (hoje ? 'Nos vemos hoje às 16h30' : 'Nos vemos amanhã às 16h30')
+                + ' na Catedral <span class="coracao">♥</span>';
+        }
+
+        function entrarVespera(aoVivo) {
+            heroSelo.hidden = false;
+            contagemTitulo.textContent = 'Faltam só';
+            textosVespera();
+            efeitos.chover(['petala', 'petala', 'coracao'], innerWidth < 600 ? 0.8 : 1.4);
+            if (!jaMostrado('surpresaVespera')) {
+                marcarMostrado('surpresaVespera');
+                setTimeout(() => {
+                    if (faseAtual !== 'vespera' || finalOverlay.classList.contains('aberto')) return;
+                    abrirOverlay(vesperaOverlay);
+                    efeitos.chover(['petala', 'petala', 'coracao'], innerWidth < 600 ? 5 : 9, 4000);
+                }, aoVivo ? 0 : 900);
+            }
+        }
+
+        function entrarCasados(aoVivo) {
+            fecharOverlay(vesperaOverlay);
+            heroSelo.hidden = false;
+            heroSelo.textContent = 'Recém-casados';
+            contagemTitulo.textContent = 'Casados há';
+            contagemNota.innerHTML = 'Felizes para sempre <span class="coracao">♥</span>';
+            efeitos.parar();
+
+            if (aoVivo || !jaMostrado('surpresaCasados')) {
+                marcarMostrado('surpresaCasados');
+                abrirOverlay(celebracaoOverlay);
+                const cx = innerWidth / 2, cy = innerHeight / 2;
+                efeitos.explosao(cx, cy, innerWidth < 600 ? 110 : 180);
+                setTimeout(() => efeitos.explosao(innerWidth * 0.2, innerHeight * 0.35, 70), 700);
+                setTimeout(() => efeitos.explosao(innerWidth * 0.8, innerHeight * 0.35, 70), 1200);
+                efeitos.chover(['confete', 'petala', 'coracao', 'petala'], innerWidth < 600 ? 4 : 7, 14000);
+            }
+        }
+
+        function contagemFinal(restante) {
+            const segundo = Math.ceil(restante / 1000);
+            if (restante > 0 && segundo <= 10) {
+                if (!finalOverlay.classList.contains('aberto')) {
+                    fecharOverlay(vesperaOverlay);
+                    abrirOverlay(finalOverlay);
+                }
+                if (segundo !== ultimoSegundoFinal) {
+                    ultimoSegundoFinal = segundo;
+                    finalNumero.textContent = segundo;
+                    finalNumero.classList.remove('tick');
+                    void finalNumero.offsetWidth;
+                    finalNumero.classList.add('tick');
+                }
+            } else if (finalOverlay.classList.contains('aberto')) {
+                fecharOverlay(finalOverlay);
+            }
+        }
+
+        // Modo noivos: só hero, recados, galeria e presentes, com visual dourado
+        let modoNoivosAtivo = false;
+
+        function aplicarModoNoivos(fase) {
+            const subtitulo = document.querySelector('.form-container .subtitulo');
+            subtitulo.textContent = fase === 'casados'
+                ? 'Deixe uma mensagem de carinho para os recém-casados!'
+                : 'Deixe uma mensagem de carinho para Marlon e Catia neste momento tão especial!';
+
+            if (modoNoivosAtivo) return;
+            modoNoivosAtivo = true;
+            document.body.classList.add('modo-noivos');
+            document.querySelector('.form-container .eyebrow').textContent = 'Para os noivos';
+
+            // Contagem sobe para o hero
+            const heroContagem = document.createElement('div');
+            heroContagem.className = 'hero-contagem';
+            heroContagem.append(contagemTitulo, document.getElementById('countdown'), contagemNota);
+            document.querySelector('#inicio .container').appendChild(heroContagem);
+
+            // Nova ordem das seções
+            const rodape = document.querySelector('.main-footer');
+            ['contato-e-recados', 'galeria', 'presentes'].forEach(id => {
+                document.body.insertBefore(document.getElementById(id), rodape);
+            });
+
+            // Menu só com as seções que ficaram
+            const menu = document.getElementById('menu');
+            const itens = {};
+            menu.querySelectorAll('li').forEach(li => {
+                itens[li.querySelector('a').getAttribute('href')] = li;
+                li.hidden = true;
+            });
+            const linkRecados = itens['#muralrec'].querySelector('a');
+            linkRecados.setAttribute('href', '#contato-e-recados');
+            linkRecados.textContent = 'Recados';
+            ['#inicio', '#muralrec', '#galeria', '#presentes'].forEach(href => {
+                itens[href].hidden = false;
+                menu.appendChild(itens[href]);
+            });
+        }
+
+        // Retorna true quando a fase muda (o contador precisa ser remontado)
+        function atualizarFase(restante) {
+            const fase = restante <= 0 ? 'casados' : restante <= UM_DIA ? 'vespera' : 'normal';
+            if (fase === 'vespera') contagemFinal(restante);
+            if (fase === faseAtual) {
+                if (fase === 'vespera') textosVespera();
+                return false;
+            }
+
+            const aoVivo = faseAtual !== null;
+            faseAtual = fase;
+            document.body.classList.toggle('fase-vespera', fase === 'vespera');
+            document.body.classList.toggle('fase-casados', fase === 'casados');
+            if (fase !== 'normal') aplicarModoNoivos(fase);
+
+            if (fase === 'vespera') entrarVespera(aoVivo);
+            if (fase === 'casados') {
+                fecharOverlay(finalOverlay);
+                entrarCasados(aoVivo);
+            }
+            return true;
+        }
+
+        document.getElementById('vesperaFechar').addEventListener('click', () => fecharOverlay(vesperaOverlay));
+        document.getElementById('celebracaoFechar').addEventListener('click', () => {
+            fecharOverlay(celebracaoOverlay);
+            efeitos.chover(['petala', 'coracao'], innerWidth < 600 ? 1.5 : 2.5, 10000);
+        });
+        vesperaOverlay.addEventListener('click', (e) => {
+            if (e.target === vesperaOverlay) fecharOverlay(vesperaOverlay);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            fecharOverlay(vesperaOverlay);
+            if (celebracaoOverlay.classList.contains('aberto')) document.getElementById('celebracaoFechar').click();
+        });
+
         function configurarRoleta() {
-            const agora = new Date().getTime();
-            const distancia = Math.max(0, dataCasamento - agora);
+            const restante = dataCasamento - agoraMs();
+            // Antes da cerimônia conta para baixo; depois, conta o tempo de casados
+            const distancia = Math.abs(restante);
+
+            if (atualizarFase(restante)) {
+                for (let id in alturaCache) delete alturaCache[id];
+                for (let id in ultimoValor) delete ultimoValor[id];
+                document.querySelectorAll('.digit-group').forEach(grupo => grupo.innerHTML = '');
+            }
 
             const valores = {
                 "dias-digits": [Math.floor(distancia / (1000 * 60 * 60 * 24)), 2],
