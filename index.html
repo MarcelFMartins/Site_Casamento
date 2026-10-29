@@ -1833,6 +1833,319 @@
             .fase-vespera #countdown,
             .fase-casados #countdown { animation: none; }
         }
+        /* ================== MODO NOIVOS (a partir de 24h antes) ================== */
+
+        .modo-noivos {
+            --ouro-escuro: #8c6a2c;
+            --ouro-grad: linear-gradient(110deg, #8c6a2c 0%, #c9a45c 20%, #f3e2b0 40%, #c9a45c 58%, #8c6a2c 78%, #c9a45c 100%);
+            background: #fbf7ee;
+        }
+
+        .modo-noivos #locais,
+        .modo-noivos #ondeficar,
+        .modo-noivos #beleza,
+        .modo-noivos .bloco-contato,
+        .modo-noivos .divisor {
+            display: none;
+        }
+
+        @keyframes brilhoOuro {
+            from { background-position: 0% 50%; }
+            to { background-position: 200% 50%; }
+        }
+
+        .modo-noivos .titulo-secao,
+        .modo-noivos #galeria h1,
+        .modo-noivos #presentes h1,
+        .modo-noivos .footer-logo {
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 0.25em;
+            background: var(--ouro-grad);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: brilhoOuro 6s linear infinite;
+        }
+
+        .modo-noivos .eyebrow {
+            color: var(--ouro-escuro);
+        }
+
+        .modo-noivos .ornament::before,
+        .modo-noivos .ornament::after {
+            width: 70px;
+            background: linear-gradient(to right, transparent, #c9a45c);
+        }
+
+        .modo-noivos .ornament::after {
+            background: linear-gradient(to left, transparent, #c9a45c);
+        }
+
+        .modo-noivos .ornament span {
+            color: #c9a45c;
+        }
+
+        /* Header */
+        .modo-noivos header.scrolled {
+            background: rgba(251, 247, 238, 0.96);
+            box-shadow: 0 1px 0 rgba(176, 141, 79, 0.35), 0 6px 24px rgba(140, 106, 44, 0.08);
+        }
+
+        .modo-noivos header.scrolled nav a {
+            color: var(--ouro-escuro) !important;
+        }
+
+        .modo-noivos header.scrolled .menu-toggle {
+            color: var(--ouro-escuro);
+        }
+
+        /* Hero */
+        .modo-noivos .hero-overlay {
+            background:
+                radial-gradient(ellipse at center, rgba(40, 32, 10, 0.25), rgba(20, 16, 4, 0.7)),
+                linear-gradient(rgba(60, 45, 10, 0.15), rgba(20, 16, 4, 0.35));
+        }
+
+        .modo-noivos #inicio h1 {
+            background: linear-gradient(110deg, #d9b56a 0%, #f3e2b0 22%, #fff8e4 40%, #e9cf8f 58%, #d9b56a 78%, #f3e2b0 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.5));
+            animation: brilhoOuro 6s linear infinite;
+            padding: 0 0.2em;
+        }
+
+        .modo-noivos #inicio .container > p {
+            color: #f3e2b0;
+        }
+
+        .modo-noivos #inicio .hero-ornament {
+            display: none;
+        }
+
+        .hero-contagem {
+            margin-top: 34px;
+        }
+
+        .hero-contagem h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: #f3e2b0;
+            margin-bottom: 14px;
+        }
+
+        #inicio .hero-contagem #countdown {
+            margin-top: 0;
+            padding: 22px 34px;
+            background: rgba(20, 16, 4, 0.38);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(217, 195, 145, 0.6);
+            border-radius: 6px;
+        }
+
+        #inicio .digit-tracker span {
+            color: #f3e2b0;
+            text-shadow: 0 0 18px rgba(217, 195, 145, 0.45);
+        }
+
+        #inicio .tempo small {
+            color: var(--dourado-claro);
+        }
+
+        #inicio .contagem-nota {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            color: #f3e2b0;
+            margin-top: 18px;
+        }
+
+        /* Recados */
+        .modo-noivos #contato-e-recados {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(217, 195, 145, 0.28), transparent 60%),
+                #fbf7ee;
+            padding-top: 130px;
+        }
+
+        .modo-noivos .form-container {
+            position: relative;
+            margin-bottom: 70px;
+            padding: 56px 42px 48px;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 24px 60px rgba(140, 106, 44, 0.12);
+        }
+
+        .modo-noivos .form-container::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(201, 164, 92, 0.55);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .modo-noivos .form-mensagem {
+            position: relative;
+        }
+
+        .modo-noivos .form-mensagem input,
+        .modo-noivos .form-mensagem textarea {
+            border-color: rgba(201, 164, 92, 0.45);
+            background: #fffdf8;
+        }
+
+        .modo-noivos .form-mensagem input:focus,
+        .modo-noivos .form-mensagem textarea:focus {
+            border-color: #c9a45c;
+            box-shadow: 0 0 0 3px rgba(217, 195, 145, 0.3);
+        }
+
+        .modo-noivos .btn-enviar {
+            background: linear-gradient(110deg, #a8823f, #d9c391 50%, #a8823f);
+            background-size: 200% auto;
+            color: var(--verde-escuro);
+            font-weight: 600;
+            transition: background-position 0.6s ease, box-shadow 0.3s ease;
+        }
+
+        .modo-noivos .btn-enviar:hover {
+            background-position: 100% 0;
+            box-shadow: 0 8px 24px rgba(140, 106, 44, 0.3);
+        }
+
+        .modo-noivos .recado-card {
+            position: relative;
+            border-color: rgba(201, 164, 92, 0.35);
+            box-shadow: inset 0 3px 0 #c9a45c, 0 10px 30px rgba(140, 106, 44, 0.08);
+        }
+
+        .modo-noivos .recado-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 6px;
+            right: 22px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            line-height: 1;
+            color: rgba(201, 164, 92, 0.35);
+        }
+
+        .modo-noivos .recado-header {
+            padding-right: 40px;
+            border-bottom-color: rgba(201, 164, 92, 0.25);
+        }
+
+        .modo-noivos .recado-header h4 {
+            color: var(--ouro-escuro);
+        }
+
+        /* Galeria */
+        .modo-noivos #galeria {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(217, 195, 145, 0.3), transparent 55%),
+                #f5eedd;
+            border-top: 1px solid rgba(176, 141, 79, 0.3);
+        }
+
+        .modo-noivos .galeria-item {
+            padding: 7px;
+            background: #fff;
+            border: 1px solid rgba(201, 164, 92, 0.5);
+            box-shadow: 0 14px 34px rgba(140, 106, 44, 0.14);
+        }
+
+        .modo-noivos .galeria-item img {
+            border-radius: 3px;
+        }
+
+        /* Presentes */
+        .modo-noivos #presentes {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(201, 164, 92, 0.25), transparent 60%),
+                linear-gradient(#333c15, #20250b);
+            border-top: 1px solid rgba(217, 195, 145, 0.45);
+        }
+
+        .modo-noivos #presentes .eyebrow {
+            color: var(--dourado-claro);
+        }
+
+        .modo-noivos .card-presente {
+            border: 1px solid rgba(217, 195, 145, 0.6);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .modo-noivos .card-overlay h2 {
+            color: #f3e2b0;
+        }
+
+        .modo-noivos .btn-presente {
+            border-color: #c9a45c;
+            color: #f3e2b0;
+        }
+
+        /* Footer */
+        .modo-noivos .main-footer {
+            background: #1a1e08;
+            border-top: 1px solid rgba(217, 195, 145, 0.35);
+        }
+
+        @media (max-width: 768px) {
+            .modo-noivos header,
+            .modo-noivos nav {
+                background: #fbf7ee;
+            }
+
+            .modo-noivos nav a {
+                color: var(--ouro-escuro);
+            }
+
+            .modo-noivos .menu-toggle {
+                color: var(--ouro-escuro);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-contagem {
+                margin-top: 24px;
+            }
+
+            .hero-contagem h2 {
+                font-size: 1.25rem;
+            }
+
+            #inicio .hero-contagem #countdown {
+                padding: 16px 18px;
+            }
+
+            #inicio .contagem-nota {
+                font-size: 1.1rem;
+            }
+
+            .modo-noivos .form-container {
+                padding: 46px 24px 36px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .modo-noivos .titulo-secao,
+            .modo-noivos #galeria h1,
+            .modo-noivos #presentes h1,
+            .modo-noivos .footer-logo,
+            .modo-noivos #inicio h1 { animation: none; }
+        }
     </style>
 </head>
 
@@ -2671,6 +2984,48 @@
             }
         }
 
+        // Modo noivos: só hero, recados, galeria e presentes, com visual dourado
+        let modoNoivosAtivo = false;
+
+        function aplicarModoNoivos(fase) {
+            const subtitulo = document.querySelector('.form-container .subtitulo');
+            subtitulo.textContent = fase === 'casados'
+                ? 'Deixe uma mensagem de carinho para os recém-casados!'
+                : 'Deixe uma mensagem de carinho para Marlon e Catia neste momento tão especial!';
+
+            if (modoNoivosAtivo) return;
+            modoNoivosAtivo = true;
+            document.body.classList.add('modo-noivos');
+            document.querySelector('.form-container .eyebrow').textContent = 'Para os noivos';
+
+            // Contagem sobe para o hero
+            const heroContagem = document.createElement('div');
+            heroContagem.className = 'hero-contagem';
+            heroContagem.append(contagemTitulo, document.getElementById('countdown'), contagemNota);
+            document.querySelector('#inicio .container').appendChild(heroContagem);
+
+            // Nova ordem das seções
+            const rodape = document.querySelector('.main-footer');
+            ['contato-e-recados', 'galeria', 'presentes'].forEach(id => {
+                document.body.insertBefore(document.getElementById(id), rodape);
+            });
+
+            // Menu só com as seções que ficaram
+            const menu = document.getElementById('menu');
+            const itens = {};
+            menu.querySelectorAll('li').forEach(li => {
+                itens[li.querySelector('a').getAttribute('href')] = li;
+                li.hidden = true;
+            });
+            const linkRecados = itens['#muralrec'].querySelector('a');
+            linkRecados.setAttribute('href', '#contato-e-recados');
+            linkRecados.textContent = 'Recados';
+            ['#inicio', '#muralrec', '#galeria', '#presentes'].forEach(href => {
+                itens[href].hidden = false;
+                menu.appendChild(itens[href]);
+            });
+        }
+
         // Retorna true quando a fase muda (o contador precisa ser remontado)
         function atualizarFase(restante) {
             const fase = restante <= 0 ? 'casados' : restante <= UM_DIA ? 'vespera' : 'normal';
@@ -2684,6 +3039,7 @@
             faseAtual = fase;
             document.body.classList.toggle('fase-vespera', fase === 'vespera');
             document.body.classList.toggle('fase-casados', fase === 'casados');
+            if (fase !== 'normal') aplicarModoNoivos(fase);
 
             if (fase === 'vespera') entrarVespera(aoVivo);
             if (fase === 'casados') {
