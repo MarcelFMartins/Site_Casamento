@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <title>Marlon e Catia</title>
     <meta name="description" content="Marlon e Catia vão se casar em 31 de outubro de 2026, em União da Vitória - PR. Venha celebrar esse dia com a gente.">
@@ -28,6 +28,22 @@
     <style>
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        /* Sem zoom: bloqueia o toque duplo */
+        html,
+        body {
+            touch-action: pan-x pan-y;
+        }
+
+        a,
+        button,
+        input,
+        textarea,
+        img {
+            touch-action: manipulation;
         }
 
         @font-face {
@@ -976,7 +992,7 @@
             border-radius: 4px;
             font-family: 'Jost', sans-serif;
             background: white;
-            font-size: 0.95rem;
+            font-size: 16px;
         }
 
         .form-mensagem input:focus,
@@ -2637,6 +2653,7 @@
 
             var input = document.createElement("input");
             input.value = texto;
+            input.style.fontSize = '16px';
             document.body.appendChild(input);
 
             input.select();
@@ -2646,6 +2663,22 @@
 
             alert("Chave PIX copiada!");
         }
+
+        // ================== SEM ZOOM (pinça e toque duplo) ==================
+        ['gesturestart', 'gesturechange', 'gestureend'].forEach(evento => {
+            document.addEventListener(evento, e => e.preventDefault(), { passive: false });
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 1 || (e.scale && e.scale !== 1)) e.preventDefault();
+        }, { passive: false });
+
+        let ultimoToque = 0;
+        document.addEventListener('touchend', (e) => {
+            const agora = Date.now();
+            if (agora - ultimoToque < 300 && !e.target.closest('input, textarea, select')) e.preventDefault();
+            ultimoToque = agora;
+        }, { passive: false });
 
         // Seleciona o header e a primeira seção
         const header = document.querySelector("header");
